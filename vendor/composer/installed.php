@@ -1,15 +1,24 @@
 <?php return array(
     'root' => array(
-        'name' => 'thiag/chest-rpg',
+        'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1e1060af34440e384684574997270487f2727fb8',
+        'reference' => '59ebd3caf1466313fb5d65b2a666f22c710b9b1a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '59ebd3caf1466313fb5d65b2a666f22c710b9b1a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'beste/clock' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -304,15 +313,6 @@
             'reference' => '42292d99c55abe617799667f454222c54c60e229',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'thiag/chest-rpg' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '1e1060af34440e384684574997270487f2727fb8',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

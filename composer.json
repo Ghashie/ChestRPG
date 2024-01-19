@@ -1,6 +1,7 @@
 {
-    "name": "thiag/chest-rpg",
+  
     "require": {
-        "kreait/firebase-php": "^7.0"
+        "kreait/firebase-php": "^7.9",
+        "kreait/firebase-auth": "^4.0"
     }
 }
