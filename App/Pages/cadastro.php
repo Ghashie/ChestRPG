@@ -41,34 +41,47 @@ if (isset($_POST['submit'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastrar</title>
+  <link rel="stylesheet" href="../../css/cadastro.css">
 </head>
 
 <body>
-  <h2>Cadastro</h2>
-  <form action="cadastro.php" method="post">
-    <label for="nickname">Nickname:</label>
-    <input type="text" id="nickname" name="nickname" required><br>
+<section class="main-content">
+    <div class="login">
+        <div class="login-screen">
+          <div class="login-form">
+            <div style="margin-left: 22px;margin-bottom: 22px;margin-top: -9px;">
+				<h1>Cadastro</h1>
+			</div>
+            <section class="control-group-main">
+            <div class="control-group">
+              <input type="text" class="login-field" value="" placeholder="Usuário"  id="login-name">
+              <label class="user" for="login-name"></label>
+            </div>
 
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" required><br>
+            <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="Email" id="login-name">
+                <label class="user" for="login-name"></label>
+              </div>
+              
+              <div class="control-group">
+                <input type="password" class="login-field" value="" placeholder="Senha" id="login-pass">
+                <label class="key" for="login-pass"></label>
+              </div>
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required><br>
-
-    <label for="confSenha">Confirmar Senha:</label>
-    <input type="password" id="confSenha" name="confSenha" required><br>
-
-    <button type="submit" name="submit">Cadastrar</button>
-  </form>
-
-  <button onclick="loginWithGoogle()">Login com Google</button>
-
-  <script>
-    function loginWithGoogle() {
-      // Implementar lógica de login com Google usando Firebase
-      alert("Implemente a lógica de login com Google aqui.");
-    }
-  </script>
+            <div class="control-group">
+              <input type="password" class="login-field" value="" placeholder="Confirmar senha" id="login-pass">
+              <label class="key" for="login-pass"></label>
+            </div>
+        </section>
+            <a class="btn btn-primary btn-large btn-block" href="#">Cadastre-se</a>
+			<p style="margin-top: 12px;">
+				<a class="login-link create" href="login.html">Entrar em minha conta</a>
+			</p>
+          </div>
+		  		  
+        </div>
+      </div>
+    </section>
 </body>
 
 </html>

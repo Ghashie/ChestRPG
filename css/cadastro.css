@@ -1,0 +1,376 @@
+a{text-decoration: none;}
+	body {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size: 14px;
+		line-height: 20px;
+		color: #333;
+		background-color: #B8C8CC;
+		width: 100%;
+
+
+	}
+	.main-content{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 96vh;
+	}
+	
+	.login {
+		color: #FFF;
+		
+
+	}
+	.login-screen {
+		min-height: 317px;
+	}
+	.login-form {
+		background-color: #243033;
+		padding: 24px 23px 20px;
+		position: relative;
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.541);
+		-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.534);
+		-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.493);
+		
+	}
+
+	.control-group-main{
+		margin-top: 2.5rem;
+		margin-bottom: 1.5rem;
+	}
+	.login-form:before {
+		content: "";
+		border-style: solid;
+		border-width: 12px 12px 12px 0;
+		border-color: #335C67;
+		background: #335C67;
+		height: 25px;
+		position: absolute;
+		left: 0px;
+		top: 22px;
+		width: 4px;
+		-webkit-transform: rotate(360deg);
+	}
+	.login-form .control-group {
+		margin-bottom: 6px;
+		position: relative;
+	}
+	.login-form .login-field {
+		border-color: rgba(0, 0, 0, 0);
+		font-size: 17px;
+		padding-bottom: 11px;
+		padding-top: 11px;
+		text-indent: 3px;
+		width: 345px;
+	
+	}
+	#login-name  {
+		color: #A1CCF7;   /* Input NOME e EMAIL */
+	}
+	textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+		border: 2px solid #DCE4EC;
+		color: #34495E;
+		font-family: "Lato", sans-serif;
+		font-size: 14px;
+		padding: 8px 0 9px 10px;
+		text-indent: 1px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+	textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+		background-color: #202125;
+		border: 1px solid #CCC;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+		-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+		-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+		transition: border linear 0.2s, box-shadow linear 0.2s;
+	}
+
+	select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+		display: inline-block;
+		height: 20px;
+		padding: 4px 6px;
+		margin-bottom: 10px;
+		font-size: 14px;
+		line-height: 20px;
+		color: #A1CCF7;   /* Senha e Confirmar senha */
+		vertical-align: middle;
+	}
+
+	input, textarea, .uneditable-input {
+		width: 192px;
+	}
+
+	input, textarea, .uneditable-input {
+		margin-left: 0;
+	}
+
+	input, textarea, .uneditable-input {
+		width: 206px;
+	}
+
+	input, button, select, textarea {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+
+	label, input, button, select, textarea {
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 20px;
+	}
+
+	button, input {
+		line-height: normal;
+	}
+
+	button, input, select, textarea {
+		margin: 0;
+		font-size: 100%;
+		vertical-align: middle;
+	}
+	label {
+		display: block;
+		margin-bottom: 5px;
+	}
+	.btn.btn-primary {
+		background-color: #335C67;
+	}
+	.btn.btn-large {
+		padding-bottom: 12px;
+		padding-top: 13px;
+	}
+	.btn {
+		border: none;
+		background: #34495E;
+		color: #FFF;
+		font-size: 16.5px;
+		text-decoration: none;
+		text-shadow: none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		-webkit-transition: 0.25s;
+		-moz-transition: 0.25s;
+		-o-transition: 0.25s;
+		transition: 0.25s;
+		-webkit-backface-visibility: hidden;
+		text-align: center;
+		border-top: 2px solid #4a7581;
+	}
+	.btn a:hover {
+		color: #fff;
+		text-decoration: none;
+	}
+	.btn-block {
+		display: block;
+		width: 100%;
+		padding-right: 0;
+		padding-left: 0;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.btn-large {
+		padding: 11px 19px;
+		font-size: 17.5px;
+	}
+
+	
+	.btn.btn-primary:hover, .btn.btn-primary:focus {
+		background-color: #56838f;
+		border-top: 2px solid #428294;
+	}
+	p {
+		margin: 0 0 10px;
+	}
+	.login-link {
+		color: #BFC9CA;
+		font-size: 13px;
+		margin-right: 11px;
+		text-align: center;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	}
+	.login-link a:hover {
+		color: #335C67;
+		text-decoration: none;
+	}
+	.user{
+		background: rgba(0, 0, 0, 0) url(user.png) no-repeat 0px 0px;
+		width: 29px;
+		height: 28px;
+		position: absolute;
+		top: 50px;
+		left: 263px;
+		}
+	.key{
+		background: rgba(0, 0, 0, 0) url(key.png) no-repeat 0px 0px;
+		width: 29px;
+		height: 28px;
+		position: absolute;
+		top: 11px;
+		left: 265px;
+	}
+	
+	.user-white{
+		background: rgba(0, 0, 0, 0) url(https://s24.postimg.org/hw812itpt/user.png) no-repeat 0px 0px;
+		width: 29px;
+		height: 28px;
+		position: absolute;
+		top: 50px;
+		left: 263px;
+	}
+	.key-white{
+		background: rgba(0, 0, 0, 0) url(https://s21.postimg.org/5hz17f6c3/key.png) no-repeat 0px 0px;
+		width: 29px;
+		height: 28px;
+		position: absolute;
+		top: 11px;
+		left: 265px;
+	}
+	
+	.create{color:#A1CCF7;} /* ENTRAR NA MINHA CONTA */
+	.white-login{float: right;
+		position: absolute;
+		top: 38px;
+		right: 281px;
+	}
+
+	/* =Media Queries
+-------------------------------------------------------------- */
+@media screen and (max-width: 1150px) {
+
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+@media screen and (max-width: 1024px) {
+
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+@media screen and (max-width: 960px) {
+
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+@media screen and (max-width: 920px) {
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+@media screen and (max-width: 880px) {
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+@media screen and (max-width: 850px) {
+ 
+	.main-content{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 96vh;
+		}
+
+}
+
+
+@media screen and (max-width: 585px) {
+	.login-form .login-field {
+		border-color: rgba(0, 0, 0, 0);
+		font-size: 17px;
+		padding-bottom: 11px;
+		padding-top: 11px;
+		text-indent: 3px;
+		width: 300px;
+	
+	}
+		
+}
+@media screen and (max-width: 540px) {
+	.login-form .login-field {
+		border-color: rgba(0, 0, 0, 0);
+		font-size: 17px;
+		padding-bottom: 11px;
+		padding-top: 11px;
+		text-indent: 3px;
+		width: 300px;
+	
+	}
+   
+}
+@media screen and (max-width: 520px) {
+	.login-form .login-field {
+		border-color: rgba(0, 0, 0, 0);
+		font-size: 17px;
+		padding-bottom: 11px;
+		padding-top: 11px;
+		text-indent: 3px;
+		width: 275px;
+	
+	}
+
+}
+
+@media screen and (max-width: 450px) {
+
+	.login-form .login-field {
+		border-color: rgba(0, 0, 0, 0);
+		font-size: 17px;
+		padding-bottom: 11px;
+		padding-top: 11px;
+		text-indent: 3px;
+		width: 235px;
+	
+	}
+}
+@media screen and (max-width: 420px) {
+
+}
+@media screen and (max-width: 380px) {
+
+}
+@media screen and (max-width: 360px) {
+
+}
+@media screen and (max-width: 350px) {
+
+}
+
+@media screen and (max-width: 325px) {
+
+}
