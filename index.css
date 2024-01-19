@@ -5,7 +5,7 @@
 }
 .header{
     width: 100%;
-    height: 15vh;
+    height: 12vh;
     background-color: #34495E;
     display: flex;
     justify-content: center;
@@ -45,20 +45,21 @@
     background-color:transparent;
     border: 2px solid transparent;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'Quicksand', sans-serif;
     cursor: pointer;
    
 }
 .btn:hover{
    color: #A1CCF7;
-   transition: 0.7s;
+   transition: 0.9s;
+
 }
 .dropdown-button{
     background-color:transparent;
     border: 2px solid transparent;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'Quicksand', sans-serif;
     cursor: pointer;
 }
@@ -103,8 +104,9 @@
 .container-main{
     width: 100%;
     height: 100vh;
-    background-color: #A7B6C4;
+   
 }
+
 
 
 .container-footer{
