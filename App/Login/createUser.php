@@ -1,42 +1,37 @@
 <?php
-// Inicializar Firebase SDK (certifique-se de que o Firebase já está configurado no seu projeto)
-require 'vendor/autoload.php';
 
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
+$username = $email = $password = $confpassword = "";
 
-// Configurar credenciais do Firebase
-$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/firebase_credentials.json');
-$firebase = (new Factory)->withServiceAccount($serviceAccount)->create();
+if (isset($_POST["record"])) {
 
-// Inicializar Firebase Authentication
-$auth = $firebase->getAuth();
+  require_once '../Model/conn.php';
+  require_once '../Model/user.php';
+  require_once '../Model/userDao.php';
 
-// Processar o formulário de cadastro
-if (isset($_POST['submit'])) {
-    $nickname = $_POST['nickname'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-    $confSenha = $_POST['confSenha'];
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // Validar senha
-    if ($senha !== $confSenha) {
-        echo "As senhas não coincidem.";
+  
+    $user = new \App\Model\User();
+    $user->setUsernameU($username);
+    $user->setEmailU($email);
+    $user->setPasswordU($password);
+    $userDao = new \App\Model\UserDao();
+    if ($userDao->create($user)) {
+      echo ("Email já cadastrado");
     } else {
-        // Cadastrar usuário no Firebase Authentication
-        try {
-            $user = $auth->createUserWithEmailAndPassword($email, $senha, ['displayName' => $nickname]);
-            echo "Usuário cadastrado com sucesso: ".$user->uid()."<br>";
-        } catch (\Kreait\Firebase\Auth\CreateUser\FailedToCreateUser $e) {
-            echo "Erro ao cadastrar usuário: ".$e->getMessage()."<br>";
-        }
+      echo ("Cadastrado com sucesso");
+      header("Location: loginUser.php");
     }
-}
+  }
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,43 +40,45 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-<section class="main-content">
+  <section class="main-content">
     <div class="login">
-        <div class="login-screen">
+      <div class="login-screen">
+        <form action="createUser.php" method="POST">
           <div class="login-form">
             <div style="margin-left: 22px;margin-bottom: 22px;margin-top: -9px;">
-				<h1>Cadastro</h1>
-			</div>
-            <section class="control-group-main">
-            <div class="control-group">
-              <input type="text" class="login-field" value="" placeholder="Usuário"  id="login-name">
-              <label class="user" for="login-name"></label>
+              <h1>Cadastro</h1>
             </div>
-
-            <div class="control-group">
-                <input type="text" class="login-field" value="" placeholder="Email" id="login-name">
+            <section class="control-group-main">
+              <div class="control-group">
+                <input type="text" class="login-field" name="username" placeholder="Usuário" id="login-name">
                 <label class="user" for="login-name"></label>
               </div>
-              
+
               <div class="control-group">
-                <input type="password" class="login-field" value="" placeholder="Senha" id="login-pass">
+                <input type="text" class="login-field" name="email" placeholder="Email" id="login-name">
+                <label class="user" for="login-name"></label>
+              </div>
+
+              <div class="control-group">
+                <input type="password" class="login-field" name="password" placeholder="Senha" id="login-pass">
                 <label class="key" for="login-pass"></label>
               </div>
 
-            <div class="control-group">
-              <input type="password" class="login-field" value="" placeholder="Confirmar senha" id="login-pass">
-              <label class="key" for="login-pass"></label>
-            </div>
-        </section>
-            <a class="btn btn-primary btn-large btn-block" href="#">Cadastre-se</a>
-			<p style="margin-top: 12px;">
-				<a class="login-link create" href="login.html">Entrar em minha conta</a>
-			</p>
+              <div class="control-group">
+                <input type="password" class="login-field" name="confpassword" placeholder="Confirmar senha"
+                  id="login-pass">
+                <label class="key" for="login-pass"></label>
+              </div>
+            </section>
+            <button type="submit" name="record" class="btn btn-primary btn-large btn-block"><a href="">Cadastre-se</a></button>
+            <p style="margin-top: 12px;">
+              <a class="login-link create" href="login.html">Entrar em minha conta</a>
+            </p>
           </div>
-		  		  
-        </div>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
 </body>
 
 </html>
