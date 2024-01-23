@@ -33,7 +33,7 @@ class UserDao {
 
   public function create(User $u){
 
-    //testar se já existe um usuário com este cpf_usuario
+    //testar se já existe um usuário com este email
     $sql = 'SELECT * FROM user WHERE emailUser = ?';
     $stmt = Conn::getConn()->prepare($sql);
     $stmt->bindValue(1,$u->getEmailU());

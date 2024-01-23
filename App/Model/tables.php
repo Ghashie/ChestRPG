@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Model;
 
-class Table{
+class Tables{
     private $idTable, $nameTable, $descriptionTable, $passwordTable, $idAdminFk, $codeTable;
 
     public function getIdT(){
