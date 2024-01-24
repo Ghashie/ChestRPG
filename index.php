@@ -212,21 +212,21 @@
     <section class="second-footer">
       <div class="image-second-footer">
         <div class="image-footer">
-        <img src="/img/face.svg" alt="">
+        <img src="img/face.svg" alt="">
       </div>
       <div class="image-footer">
-        <img src="/img/insta.svg" alt="">
+        <img src="img/insta.svg" alt="">
       </div>
       <div class="image-footer">
-        <img src="/img/twitter.svg" alt="">
+        <img src="img/twitter.svg" alt="">
       </div>
       <div class="image-footer">
-        <img src="/img/discord.svg" alt="">
+        <img src="img/discord.svg" alt="">
       </div>
       </div>
 
       <div class="logo-footer">
-        <a href="index.html"><img src="/img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img-footer"></a>
+        <a href="index.html"><img src="img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img-footer"></a>
       </div>
       <div class="text-footer">
         <p>© 2022 CHEST RPG. Todos os direitos reservados.</p>
