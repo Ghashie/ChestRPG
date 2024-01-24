@@ -57,6 +57,9 @@ body{
   cursor: pointer;
  
 }
+.btn a{
+  text-decoration: none;
+}
 .btn:hover{
  color: #A1CCF7;
  transition: 0.7s;
