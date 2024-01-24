@@ -526,6 +526,11 @@ body{
   cursor: pointer;
   font-weight: bold;
 }
+.button-container-gallery button a {
+text-decoration: none;
+color: #fff;
+}
+
 
 .button-container-gallery button:hover{
   color: #bdd0e2;

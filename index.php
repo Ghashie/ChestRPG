@@ -187,7 +187,7 @@
 
     <section class="button-gallery">
       <div class="button-container-gallery">
-        <button>EXPLORE MAIS CLASSES</button>
+       <button > <a href="App/Pages/classes.php"> EXPLORE MAIS CLASSES </a></button>
       </div>
     </section>
   </main>
