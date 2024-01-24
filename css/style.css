@@ -116,7 +116,7 @@ body{
 }
 .first-section {
   width: 100%;
-  background-image: url("img/Design\ sem\ nome\ \(1\).png"); 
+  background-image: url(../img/Design\ sem\ nome\ \(1\).png); 
   background-size: cover;
   height: 120vh;
   position: relative;

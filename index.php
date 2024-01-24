@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Montserrat:wght@100&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
-  <title>Document</title>
+  <title>CHEST RPG</title>
 </head>
 
 <body>
