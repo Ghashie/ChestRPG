@@ -1,7 +1,7 @@
 {
   
     "require": {
-        "kreait/firebase-php": "^7.9",
-        "kreait/firebase-auth": "^4.0"
+        "slim/slim": "^4.0",
+        "kreait/firebase-php": "^5.26"
     }
 }
