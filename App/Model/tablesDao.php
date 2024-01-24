@@ -22,6 +22,18 @@ class TablesDao {
         $stmt->execute();
     }
 
+    public function joinTable($idUser, $code){
+        $table = $this->getTableByCode($code);
+
+        if($table){
+            $member = new Members($idUser, $table['idTable']);
+            $memberDao = new MembersDao();
+            $memberDao->join($member);
+        } else {
+            echo 'Mesa não encontrada!';
+        }
+    }
+
     public function read(){
         $sql = 'SELECT * FROM tables';
         $stmt = Conn::getConn()->prepare($sql);

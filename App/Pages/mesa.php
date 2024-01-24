@@ -6,6 +6,7 @@ require_once '../Model/tablesDao.php';
 require_once '../Model/user.php';
 require_once '../Model/userDao.php';
 
+
 if (!isset($_SESSION))
   session_start();
 if (isset($_SESSION['idUser'])) {
@@ -39,6 +40,15 @@ if (isset($_SESSION['idUser'])) {
 
     $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
     $tableDao->create($table); // Chamar a função create no TableDao
+  }
+
+  if (isset($_POST['join'])){
+    $joinCode = $_POST['code'];
+    $idUser = $_SESSION['idUser'];
+
+    $table = new \App\Model\TablesDao();
+    
+
   }
 }
 ?>
@@ -81,6 +91,7 @@ if (isset($_SESSION['idUser'])) {
   </header>
 
   <main class="main-content">
+    
     <div class="content-button-left">
       <button id="openModalBtn" class="button"> Crie sua mesa</button>
       <div id="myModal" class="modal">
@@ -126,7 +137,7 @@ if (isset($_SESSION['idUser'])) {
     </div>
 
     <div class="content-button-right">
-      <button class="button">Entre em uma mesa</button>
+      <button id="openJoinModalBtn" class="button">Entre em uma mesa</button>
       <div id="joinModal" class="modal">
         <div class="modal-content">
           <span class="close" id="closeJoinModalBtn">&times;</span>
@@ -136,7 +147,7 @@ if (isset($_SESSION['idUser'])) {
           <form action="mesa.php" method="POST">
             <section class="control-group-main">
               <div class="control-group">
-                <input type="text" class="login-field" name="joinCode" placeholder="Código da mesa" id="join-code">
+                <input type="text" class="login-field" name="code" placeholder="Código da mesa" id="join-code">
               </div>
               <div>
                 <div class="modal-button-main">
