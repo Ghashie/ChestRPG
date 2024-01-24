@@ -63,7 +63,7 @@ if (isset($_POST['search'])) {
               </div>
             </section>
 
-            <button class="btn btn-primary btn-large btn-block" name="search"><a href="#">Logar-se</a></button>
+            <button class="btn btn-primary btn-large btn-block" name="search">Logar-se</button>
             <p style="margin-top: 12px;">
               <a class="login-link" href="#">Esqueci minha senha </a>
               <a class="login-link create" href="createUser.php">Crie sua conta</a>
