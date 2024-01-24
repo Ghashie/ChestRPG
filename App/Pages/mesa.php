@@ -5,8 +5,10 @@ require_once '../Model/tables.php';
 require_once '../Model/tablesDao.php';
 require_once '../Model/user.php';
 require_once '../Model/userDao.php';
+require_once '../Model/members.php';
+require_once '../Model/membersDao.php';
 
-
+//Session part
 if (!isset($_SESSION))
   session_start();
 if (isset($_SESSION['idUser'])) {
@@ -42,14 +44,31 @@ if (isset($_SESSION['idUser'])) {
     $tableDao->create($table); // Chamar a função create no TableDao
   }
 
-  if (isset($_POST['join'])){
+  if (isset($_POST['join'])) {
     $joinCode = $_POST['code'];
     $idUser = $_SESSION['idUser'];
 
-    $table = new \App\Model\TablesDao();
-    
+    $tableDao = new \App\Model\TablesDao();
+    $tableData = $tableDao->getTableByCode($joinCode);
 
-  }
+    if ($tableData) {
+        // Mesa encontrada, agora você pode associar o usuário à mesa na tabela members
+        $membersDao = new \App\Model\MembersDao();
+        $member = new \App\Model\Members();
+        $member->setIdUM($idUser);
+        $member->setIdTM($tableData['idTable']);
+        $member->setIsAdmin(false);  // Defina como desejado, neste exemplo é nulo.
+
+        $membersDao->join($member);
+        
+        // Redirecione ou faça qualquer outra coisa após o usuário se juntar à mesa
+        header("Location: insideTable.php");
+        exit();
+    } else {
+        // Mesa não encontrada, adicione a lógica apropriada (ex: exiba uma mensagem de erro)
+        echo "Mesa não encontrada.";
+    }
+}
 }
 ?>
 
@@ -137,23 +156,24 @@ if (isset($_SESSION['idUser'])) {
     </div>
 
     <div class="content-button-right">
-      <button id="openJoinModalBtn" class="button">Entre em uma mesa</button>
+      <button id="openJoinModalBtn" class="button"> Juntar-se a uma mesa</button>
       <div id="joinModal" class="modal">
         <div class="modal-content">
           <span class="close" id="closeJoinModalBtn">&times;</span>
+
+          <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
           <div class="main-text-modal">
-            <h1>Entre em uma mesa existente</h1>
+            <h1>Junte-se a uma mesa</h1>
           </div>
           <form action="mesa.php" method="POST">
             <section class="control-group-main">
               <div class="control-group">
-                <input type="text" class="login-field" name="code" placeholder="Código da mesa" id="join-code">
+                <input type="text" class="login-field" name="code" placeholder="Código da mesa" id="login-name">
+                <label class="user" for="login-name"></label>
               </div>
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Entrar na mesa<i
-                      class="animation"></i>
-                  </button>
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i class="animation"></i></button>
                 </div>
               </div>
             </section>
