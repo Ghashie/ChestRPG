@@ -94,5 +94,22 @@ class TablesDao {
             return null;
         }
     }
+
+    public function getTablesByUserId($idUser){
+        $sql = 'SELECT t.* FROM tables t 
+                INNER JOIN members m ON t.idTable = m.idTable 
+                WHERE m.idUser = ?';
+    
+        $stmt = Conn::getConn()->prepare($sql);
+        $stmt->bindValue(1, $idUser);
+        $stmt->execute();
+    
+        if($stmt->rowCount() > 0){
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            return [];
+        }
+    }
+
 }
-?>
