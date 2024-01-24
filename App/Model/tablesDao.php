@@ -16,7 +16,7 @@ class TablesDao {
         $stmt->bindvalue(1, $t->getNameT());
         $stmt->bindvalue(2, $t->getDescriptionT());
         $stmt->bindvalue(3, $t->getPasswordT());
-        $stmt->bindvalue(4, $t->getIdFK());
+        $stmt->bindvalue(4, $t->getIdFK()->getIdU());
         $stmt->bindvalue(5, $code);
 
         $stmt->execute();

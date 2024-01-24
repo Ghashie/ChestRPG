@@ -1,13 +1,4 @@
 <?php
-
-session_start();
-session_regenerate_id(true);
-
-if (!isset($_SESSION['idUser'])) { // Verificar se o usuário está logado
-  header("Location: ../Login/loginUser.php"); // Se não estiver logado, redirecione para a página de login
-  exit();
-}
-
 // Incluir suas classes e métodos necessários
 require_once '../Model/conn.php';
 require_once '../Model/tables.php';
@@ -15,24 +6,40 @@ require_once '../Model/tablesDao.php';
 require_once '../Model/user.php';
 require_once '../Model/userDao.php';
 
-// Verificar se o formulário de criação de mesa foi enviado
-if (isset($_POST['create'])) {
-  $tableName = $_POST['name'];
-  $tableDescription = $_POST['description'];
-  $password = $_POST['password'];
-  echo($_SESSION['idUser']);
-  // Obter o ID do usuário logado
-  $idUser = $_SESSION['idUser'];
-
-  $table = new \App\Model\Tables();  // Criar uma instância da tabela e definir os valores
-  $table->setIdFK($idUser);
-  $table->setNameT($tableName);
-  $table->setDescriptionT($tableDescription);
-  $table->setPasswordT($password);
+if (!isset($_SESSION))
+  session_start();
+if (isset($_SESSION['idUser'])) {
+  if (!isset($_SESSION['idUser'])) {
+    die('Você precisa estar logado para acessar esta página');
+    header("Location: ../Login/loginUser.php");
+  }
+  $_SESSION['idUser']->getIdU();
 
 
-  $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
-  $tableDao->create($table); // Chamar a função create no TableDao
+
+  if (!isset($_SESSION['idUser'])) { // Verificar se o usuário está logado
+    header("Location: ../Login/loginUser.php"); // Se não estiver logado, redirecione para a página de login
+    exit();
+  }
+
+  // Verificar se o formulário de criação de mesa foi enviado
+  if (isset($_POST['create'])) {
+    $tableName = $_POST['name'];
+    $tableDescription = $_POST['description'];
+    $password = $_POST['password'];
+    // Obter o ID do usuário logado
+    $idUser = $_SESSION['idUser'];
+
+    $table = new \App\Model\Tables();  // Criar uma instância da tabela e definir os valores
+    $table->setIdFK($idUser);
+    $table->setNameT($tableName);
+    $table->setDescriptionT($tableDescription);
+    $table->setPasswordT($password);
+
+
+    $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
+    $tableDao->create($table); // Chamar a função create no TableDao
+  }
 }
 ?>
 
@@ -70,11 +77,10 @@ if (isset($_POST['create'])) {
       </div>
       <button class="btn">Atualizações</button>
     </div>
-    <div class="login">Login</div>
+    <div class="login">Login <a href="../Login/logout.php">Logout</a></div>
   </header>
 
   <main class="main-content">
-
     <div class="content-button-left">
       <button id="openModalBtn" class="button"> Crie sua mesa</button>
       <div id="myModal" class="modal">
@@ -121,6 +127,28 @@ if (isset($_POST['create'])) {
 
     <div class="content-button-right">
       <button class="button">Entre em uma mesa</button>
+      <div id="joinModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeJoinModalBtn">&times;</span>
+          <div class="main-text-modal">
+            <h1>Entre em uma mesa existente</h1>
+          </div>
+          <form action="mesa.php" method="POST">
+            <section class="control-group-main">
+              <div class="control-group">
+                <input type="text" class="login-field" name="joinCode" placeholder="Código da mesa" id="join-code">
+              </div>
+              <div>
+                <div class="modal-button-main">
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Entrar na mesa<i
+                      class="animation"></i>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </form>
+        </div>
+      </div>
     </div>
 
   </main>
