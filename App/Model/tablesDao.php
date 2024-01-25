@@ -97,11 +97,11 @@ class TablesDao {
 
     public function getTablesByUserId($idUser){
         $sql = 'SELECT t.* FROM tables t 
-                INNER JOIN members m ON t.idTable = m.idTable 
-                WHERE m.idUser = ?';
+                LEFT JOIN members m ON t.idTable = m.idTable 
+                WHERE m.idUser = :idUser OR t.idAdmin = :idUser';
     
         $stmt = Conn::getConn()->prepare($sql);
-        $stmt->bindValue(1, $idUser);
+        $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
         $stmt->execute();
     
         if($stmt->rowCount() > 0){
@@ -111,5 +111,6 @@ class TablesDao {
             return [];
         }
     }
+    
 
 }
