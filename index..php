@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Montserrat:wght@100&display=swap"
     rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=MedievalSharp' rel='stylesheet'>
   <link rel="stylesheet" href="./css/style.css">
   <title>CHEST RPG</title>
 </head>
