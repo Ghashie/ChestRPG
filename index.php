@@ -30,7 +30,7 @@
           <a href="#">Entrar em mesa existente</a>
         </div>
       </div>
-     </a><button class="btn"> <a href="App/Pages/atualizacao.php"> ATUALIZAÇÕES</a></button>
+      <button class="btn" onclick="window.location.href='App/Pages/atualizacao.php'">ATUALIZAÇÕES</button>
     </div>
     <div class="login">LOgin</div>
   </header>

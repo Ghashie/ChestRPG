@@ -55,11 +55,14 @@ body{
   font-size: 15px;
   font-family: 'Quicksand', sans-serif;
   cursor: pointer;
- 
+  text-decoration: none; /* Remove sublinhado */
 }
+.btn,
 .btn a{
-  text-decoration: none;
+  text-decoration: none; /* Remove sublinhado */
+  color: white;
 }
+
 .btn:hover{
  color: #A1CCF7;
  transition: 0.7s;
