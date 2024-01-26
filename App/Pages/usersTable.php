@@ -175,7 +175,7 @@ if (isset($_SESSION['idUser'])) {
         <p>Código:
           <?= $table['codeTable'] ?>
         </p>
-        <a href="insideTable.php?tableId=<?= $table['idTable'] ?>" class="enter-button">Entrar</a>
+        <a href="insideTable.php?idTable=<?= $table['idTable'] ?>" class="enter-button">Entrar</a>
         <!-- Adicione outros detalhes do card conforme necessário -->
       </div>
     <?php endforeach; ?>

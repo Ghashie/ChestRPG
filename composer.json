@@ -1,7 +1,6 @@
 {
   
     "require": {
-        "slim/slim": "^4.0",
-        "kreait/firebase-php": "^5.26"
+        "cboden/ratchet": "^0.4.4"
     }
 }
