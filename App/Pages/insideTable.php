@@ -125,10 +125,7 @@ if (!is_array($membersList)) {
         conn.send(message);
         messageInput.value = '';
         console.log('Mensagem enviada:', message);
-    } else {
-        console.log('A conexão WebSocket não está aberta.');
-        // Adote uma lógica apropriada, por exemplo, tentar novamente ou exibir uma mensagem ao usuário.
-    }
+    } 
 }
 
     // Função para rolar dados
