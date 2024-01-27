@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Jan-2024 às 06:25
+-- Tempo de geração: 27-Jan-2024 às 00:12
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -45,8 +45,17 @@ CREATE TABLE `charactercard` (
 CREATE TABLE `members` (
   `idUser` int(11) NOT NULL,
   `idTable` int(11) NOT NULL,
-  `is_admin` tinyint(1) DEFAULT NULL
+  `isAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `members`
+--
+
+INSERT INTO `members` (`idUser`, `idTable`, `isAdmin`) VALUES
+(4, 6, 0),
+(4, 8, 0),
+(6, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -59,9 +68,18 @@ CREATE TABLE `tables` (
   `nameTable` varchar(100) DEFAULT NULL,
   `descriptionTable` varchar(255) DEFAULT NULL,
   `passwordTable` varchar(255) DEFAULT NULL,
-  `idAdmin` int(11) DEFAULT NULL,
-  `codeTable` varchar(6) DEFAULT NULL
+  `codeTable` varchar(6) DEFAULT NULL,
+  `idAdmin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tables`
+--
+
+INSERT INTO `tables` (`idTable`, `nameTable`, `descriptionTable`, `passwordTable`, `codeTable`, `idAdmin`) VALUES
+(6, 'Teste', 'Primeira mesa testada', '123', 'hm4h8c', 4),
+(8, 'O Hermano', 'Site de comidas Latino Americanas', '123', 'hm4hwq', 3),
+(12, 'Familia', 'Toretto\'s Family', '123', 'hm5nmb', 4);
 
 -- --------------------------------------------------------
 
@@ -82,7 +100,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`idUser`, `usernameUser`, `emailUser`, `passwordUser`) VALUES
 (3, 'Ghashie', 'teste@gmail.com', '$2y$10$CraoPTkqB4AJC86hX.y88OLw2pwEkAgc.xhudLSBgyaGAjgFDY1xe'),
-(4, 'Yugi', 'yugi@gmail.com', '$2y$10$rlJiXsMlODC7v4Hiu4bVwuqit2jFTA8.YOhEki8AhV.WWYgCn1XvG');
+(4, 'Yugi', 'yugi@gmail.com', '$2y$10$rlJiXsMlODC7v4Hiu4bVwuqit2jFTA8.YOhEki8AhV.WWYgCn1XvG'),
+(5, 'Bea', ' bea@gmail.com', '$2y$10$YqALnpQyhZzkJjyVsmalNOcCYI0gVxBjBU4jbfMzCUB3LkKP/V.z6'),
+(6, 'Vasco', 'vasco@gmail.com', '$2y$10$rq2Z1J.jkp1lgc4NDk.Sku/T9RJw8T7xoA16Ax/DJbzlaWdEjvIUW');
 
 --
 -- Índices para tabelas despejadas
@@ -109,7 +129,7 @@ ALTER TABLE `members`
 ALTER TABLE `tables`
   ADD PRIMARY KEY (`idTable`),
   ADD UNIQUE KEY `codeTable` (`codeTable`),
-  ADD KEY `idAdmin` (`idAdmin`);
+  ADD KEY `idUser` (`idAdmin`);
 
 --
 -- Índices para tabela `user`
@@ -131,13 +151,13 @@ ALTER TABLE `charactercard`
 -- AUTO_INCREMENT de tabela `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `idTable` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTable` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para despejos de tabelas
