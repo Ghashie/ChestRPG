@@ -90,12 +90,12 @@ if (!is_array($membersList)) {
             <h2>Rolar Dados</h2>
             <label for="dice-type">Tipo de Dado:</label>
             <select id="dice-type">
-                <option value="d4">D4</option>
-                <option value="d6">D6</option>
-                <option value="d8">D8</option>
-                <option value="d10">D10</option>
-                <option value="d12">D12</option>
-                <option value="d20">D20</option>
+                <option value="4">D4</option>
+                <option value="6">D6</option>
+                <option value="8">D8</option>
+                <option value="10">D10</option>
+                <option value="12">D12</option>
+                <option value="20">D20</option>
             </select>
             <label for="dice-quantity">Quantidade:</label>
             <input type="number" id="dice-quantity" min="1" value="1">
@@ -104,41 +104,87 @@ if (!is_array($membersList)) {
         </section>
     </main>
 </body>
+
+
 <script>
     const conn = new WebSocket('ws://localhost:8080');
+    
     conn.onopen = function (event) {
         console.log('Conexão WebSocket aberta');
     };
 
     conn.onmessage = function (event) {
-        console.log(`Mensagem recebida: ${event.data}`);
-        // Manipule a mensagem recebida (chat ou resultado do dado) e atualize a interface do usuário
+        console.log('Mensagem recebida:', event.data);
+
+        // Obtenha o contêiner de mensagens
         const messageContainer = document.getElementById('message-container');
-        messageContainer.innerHTML += `<p>${event.data}</p>`;
+
+        // Crie um novo elemento de parágrafo para a mensagem
+        const newMessage = document.createElement('p');
+
+        // Adicione a mensagem ao novo elemento
+        newMessage.textContent = event.data;
+
+        // Adicione o novo elemento ao contêiner de mensagens
+        messageContainer.appendChild(newMessage);
+
+        // Role até o final do contêiner para exibir a última mensagem
+        messageContainer.scrollTop = messageContainer.scrollHeight;
     };
 
     function sendMessage() {
-    const messageInput = document.getElementById('message-input');
-    const message = messageInput.value;
+        const messageInput = document.getElementById('message-input');
+        const message = messageInput.value;
 
-    if (conn.readyState === WebSocket.OPEN) {
-        conn.send(message);
-        messageInput.value = '';
-        console.log('Mensagem enviada:', message);
-    } 
-}
+        if (conn.readyState === WebSocket.OPEN) {
+            // Inclua o nome do usuário na mensagem
+            const user = '<?php echo addslashes($member['usernameUser']); ?>';
+            const formattedMessage = `${user}: ${message}`;
+
+            // Envia a mensagem para todos, incluindo o remetente
+            conn.send(formattedMessage);
+            messageInput.value = '';
+            console.log('Mensagem enviada:', formattedMessage);
+        }
+    }
 
     // Função para rolar dados
     function rollDice() {
-        const diceType = document.getElementById('dice-type').value;
-        const quantity = document.getElementById('dice-quantity').value;
-        const result = Math.floor(Math.random() * diceType * quantity) + 1;
-        const resultContainer = document.getElementById('result-container');
-        resultContainer.innerHTML = `<p>${quantity}d${diceType}: ${result}</p>`;
+        const user = '<?php echo addslashes($member['usernameUser']); ?>';
+        const diceType = parseInt(document.getElementById('dice-type').value, 10);
+        const quantity = parseInt(document.getElementById('dice-quantity').value, 10);
 
-        // Envia a mensagem do resultado do dado para o WebSocket
-        conn.send(`${quantity}d${diceType}: ${result}`);
+        // Verifique se os valores são números válidos
+        if (isNaN(diceType) || diceType <= 0 || isNaN(quantity) || quantity <= 0) {
+            console.error('Valores inválidos para o tipo de dado ou quantidade.');
+            return;
+        }
+
+        // Simula o lançamento de dados e gera resultados
+        const results = [];
+        for (let i = 0; i < quantity; i++) {
+            const result = Math.floor(Math.random() * diceType) + 1;
+            results.push(result);
+        }
+
+        // Construa as mensagens com os resultados dos dados
+        const diceMessages = results.map(result => `${user} rodou um D${diceType} = ${result}`);
+
+        // Envia as mensagens dos resultados dos dados para o WebSocket
+        diceMessages.forEach(message => {
+            conn.send(message);
+            displayMessage(message); // Exibir a mensagem localmente
+        });
+    }
+
+    // Função para exibir mensagens localmente
+    function displayMessage(message) {
+        const messageContainer = document.getElementById('message-container');
+        const newMessage = document.createElement('p');
+        newMessage.textContent = message;
+        messageContainer.appendChild(newMessage);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
     }
 </script>
-</html>
 
+</html>
