@@ -17,13 +17,14 @@
 
 <body>
 
-  <header class="header">
+  <header class="header" id="header">
     <div class="logo">
       <a href="index.html"><img src="img/logo.png" alt="" class="logo-img"></a>
     </div>
-    <div class="container">
-      <button class="btn">HOME</button>
-     <a href="https://www.youtube.com/"><button class="btn">SOBRE</button></a> 
+
+    <div class="container" >
+        <a href="#puxar"><button class="btn"  >HOME</button></a>
+     <a href="#update"><button class="btn">SOBRE</button></a> 
       <div class="dropdown">
         <button class="dropdown-button">MESAS </button>
         <div class="dropdown-content">
@@ -34,8 +35,9 @@
       <button class="btn" onclick="window.location.href='App/Pages/atualizacao.php'">ATUALIZAÇÕES</button>
     </div>
     <div class="login">LOgin</div>
+    
   </header>
-
+<div id="puxar"></div>
   <main class="main-content">
 
     <section class="first-section">
@@ -109,50 +111,38 @@
         </div>
 
       </section>
+      
     </section>
-
-    <section class="update">
+    <section class="update" id="update" >
       <div class="text-container-update">
-        <h1>NOVIDADES</h1>
+        <h1>Sobre Nós</h1>
       </div>
 
-      <div class="image-update">
-        <div class="card">
-          <img src="img/1.1.jpeg" alt="Imagem 1">
-          <div class="card-text">
-            <p>NOTAS DE PATCH DE CHEST RPG</p>
-          </div>
-          <div class="card-date">22 de jan.</div>
-        </div>
+      <div class="text-update">
+        <p>
 
-        <div class="card">
-          <img src="img/1.1.jpeg" alt="Imagem 2">
-          <div class="card-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="card-date">22 de jan.</div>
-        </div>
+          Bem-vindo à ChestRPG, onde a paixão pelo RPG se encontra com a inovação tecnológica. Somos uma comunidade
+          fundada por amantes de aventuras e narrativas incríveis, unidos pelo desejo de criar experiências de jogo
+          inesquecíveis.
 
-        <div class="card">
-          <img src="img/1.1.jpeg" alt="Imagem 3">
-          <div class="card-text">
-            <p>edit doloremne nam eos quidem aliquam labore velit eveniet et. Ab, asperiores.</p>
-          </div>
-          <div class="card-date">22 de jan.</div>
-        </div>
+          Nossa história é marcada pela visão de ultrapassar limites, proporcionando um ambiente online onde a magia do
+          role-playing game ganha vida. Desde nossa fundação, trabalhamos arduamente para construir uma comunidade
+          acolhedora e uma plataforma tecnologicamente avançada.
 
-        <div class="card">
-          <img src="img/1.1.jpeg" alt="Imagem 4">
-          <div class="card-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="card-date">22 de jan.</div>
-        </div>
+          Os valores fundamentais que nos guiam são inovação, comunidade, diversidade e qualidade. Buscamos
+          constantemente a excelência, oferecendo um espaço inclusivo que celebra a diversidade e conecta jogadores em
+          narrativas envolventes.
+
+          O que nos torna únicos é nossa plataforma versátil, que atende a diversas preferências e estilos de jogo. Seja
+          você um fã de fantasia, ficção científica ou horror, a ChestRPG é um lar para todos. Nosso compromisso com a
+          comunidade é constante, acreditando que o feedback é a chave para melhorias contínuas.
+
+          Convidamos você a se juntar à ChestRPG, seja você um veterano em busca de novos desafios ou um novato pronto
+          para sua primeira aventura. Embarque em jornadas épicas, crie personagens inesquecíveis e faça parte de uma
+          comunidade apaixonada que compartilha a mesma sede por histórias extraordinárias. ChestRPG - Onde as aventuras
+          ganham vida.</p>
       </div>
 
-      <div class="button-container">
-        <button>Ver Mais</button>
-      </div>
     </section>
 
 
