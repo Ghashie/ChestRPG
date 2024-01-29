@@ -2,11 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+  scroll-padding-top:11vh ;
 }
-body{
+html,body{
   background-color: #18191d;
   min-height: 100vh;
 
+ 
 }
 .header{
   width: 100%;
@@ -317,7 +320,7 @@ body{
   background-color: #252730;
   margin-top: 40px;
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -326,7 +329,7 @@ body{
 .text-container-update {
   text-align: center;
   width: 100%;
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 }
 
 .text-container-update h1 {
@@ -337,75 +340,20 @@ body{
   font-weight: bold;
 }
 
-.image-update {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.text-update {
+  text-align: justify; 
+  padding: 0 20px; 
 }
 
-.card {
-  position: relative;
-  width: calc(25% - 20px);
-  margin: 10px;
-  background-color: #2b3c4e;
-  box-sizing: border-box;
-  overflow: hidden;
-  color: #fff;
-  height: 30rem;
-  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.568); /* Adicione esta linha para a sombra */
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-}
-
-.card-text {
-  margin-top: 50px;
-  padding: 15px;
-  padding-left: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-text p {
-  font-size: 20px;
-  text-align: left;
-}
-
-.card-date {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 18px;
-}
-
-.button-container {
+.text-update p {
   text-align: center;
-  margin-top: 20px;
-}
-
-.button-container button {
-  width: 320px;
-  height: 45px;
-  background-color: transparent;
-  font-size: 25px;
   font-family: 'Inconsolata', monospace;
-  letter-spacing: 3px;
-  font-weight: bold;
-  color: #fff;
-  border: 2px solid #fff;
-  cursor: pointer;
-
+  font-size: 20px;
+line-height: 1.4rem;
+color: white;
+margin-bottom: 20px;
 }
 
-.button-container button:hover{
-  color: #fff;
-  background-color: #34495E;
-  transition: 0.4s;
-  border: none;
-}
 
 
 
