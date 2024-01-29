@@ -14,9 +14,10 @@ if (!isset($_SESSION)) {
 }
 // Verificar se o usuário está logado
 if (isset($_SESSION['idUser'])) {
+  if (!isset($_SESSION['idUser'])) {
     header("Location: ../Login/loginUser.php");
     exit();
-}
+  }
   // Obter o ID do usuário logado
   $_SESSION['idUser']->getIdU();
 
@@ -77,7 +78,7 @@ if (isset($_SESSION['idUser'])) {
     header("Location: usersTable.php");
     exit();
   }
-
+}
 ?>
 
 

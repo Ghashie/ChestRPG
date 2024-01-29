@@ -14,22 +14,14 @@ class MembersDao
     $stmt->execute();
   }
 
-  public function getMembersByTableId($idTable){
-    $sql = "SELECT m.idUser, m.isAdmin, u.usernameUser
-            FROM members m
-            INNER JOIN user u ON m.idUser = u.idUser
-            WHERE m.idTable = ?
-            
-            UNION
-            
-            SELECT t.idAdmin as idUser, 1 as isAdmin, u.usernameUser
-            FROM tables t
-            INNER JOIN user u ON t.idAdmin = u.idUser
-            WHERE t.idTable = ?";
+  public function getMembersByTableId($idTable)
+  {
+    $sql = "SELECT m.*, u.usernameUser FROM members m
+    INNER JOIN user u ON m.idUser = u.idUser
+    WHERE m.idTable = ?";
 
     $stmt = Conn::getConn()->prepare($sql);
     $stmt->bindValue(1, $idTable);
-    $stmt->bindValue(2, $idTable);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
@@ -39,6 +31,5 @@ class MembersDao
       return [];
     }
   }
-
 }
 ?>

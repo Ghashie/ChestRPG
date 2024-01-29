@@ -23,8 +23,8 @@ if (isset($_POST['search'])) {
     if (!isset($_SESSION))
       session_start();
     $_SESSION['idUser'] = $idU;
-    $_SESSION['emailUser'] = $user->getEmailU();
-    $_SESSION['usernameUser'] = $user->getUsernameU();
+    $_SESSION['email'] = $user->getEmailU();
+    $_SESSION['username'] = $user->getUsernameU();
     header("Location: ../Pages/mesa.php");
   } else {
     echo ("Email ou senha inválidos");

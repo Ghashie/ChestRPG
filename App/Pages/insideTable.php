@@ -24,10 +24,6 @@ if (!isset($_GET['idTable'])) {
     exit();
 }
 
-$user = $_SESSION['usernameUser'];
-$_SESSION['current_user'] = isset($user['usernameUser']) ? $user['usernameUser'] : '';
-
-
 // Obtenha o ID da mesa da URL
 $idTable = $_GET['idTable'];
 
@@ -62,12 +58,10 @@ if (!is_array($membersList)) {
     </title>
     <link rel="stylesheet" href="../../css/insideTable.css"> <!-- Ajuste o caminho conforme necessário -->
     <script src="../../js/insideTable.js"></script> <!-- Ajuste o caminho conforme necessário -->
-    
 </head>
 
 <body>
     <header>
-    <button id="exit-button" onclick="exitChat()">Sair do Chat</button>
         <h1>Mesa:
             <?= $table['nameTable'] ?>
         </h1>
@@ -113,8 +107,8 @@ if (!is_array($membersList)) {
 
 
 <script>
-    const conn = new WebSocket('ws://localhost:8080?idTable=<?= $idTable ?>');
-
+    const conn = new WebSocket('ws://localhost:8080');
+    
     conn.onopen = function (event) {
         console.log('Conexão WebSocket aberta');
     };
@@ -143,15 +137,16 @@ if (!is_array($membersList)) {
         const message = messageInput.value;
 
         if (conn.readyState === WebSocket.OPEN) {
-            const user = '<?php echo addslashes($_SESSION['current_user']); ?>';
-            const formattedMessage = `${user} (Mesa <?= $idTable ?>): ${message}`;
+            // Inclua o nome do usuário na mensagem
+            const user = '<?php echo addslashes($member['usernameUser']); ?>';
+            const formattedMessage = `${user}: ${message}`;
 
+            // Envia a mensagem para todos, incluindo o remetente
             conn.send(formattedMessage);
             messageInput.value = '';
             console.log('Mensagem enviada:', formattedMessage);
         }
     }
-
 
     // Função para rolar dados
     function rollDice() {
@@ -189,11 +184,6 @@ if (!is_array($membersList)) {
         newMessage.textContent = message;
         messageContainer.appendChild(newMessage);
         messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
-
-    function exitChat() {
-        // Redirecionar para a página usersTable.php
-        window.location.href = 'usersTable.php';
     }
 </script>
 
