@@ -6,10 +6,9 @@ use Ratchet\ConnectionInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
 
 class WebSocket implements MessageComponentInterface
-{
-    protected $clientNames;  // Armazena o nome de usuário associado a cada conexão
+{  // Armazena o nome de usuário associado a cada conexão
     protected $client;
-    protected $messageHistory; // Armazena o histórico de mensagens
+    protected $messageHistory = []; // Armazena o histórico de mensagens
 
     public function __construct()
     {
@@ -20,26 +19,40 @@ class WebSocket implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
-        $this->client->attach($conn);
-        error_log("Nova conexão estabelecida: {$conn->resourceId}");
+        $tableId = $this->getTableIdFromQueryString($conn->httpRequest->getUri()->getQuery());
+        $this->client->attach($conn, ['tableId' => $tableId]);
+
+        error_log("Nova conexão estabelecida: {$conn->resourceId} (Mesa: {$tableId})");
+
+        $username = $this->getUsernameFromDatabase($conn);
+        $this->setClientName($conn, $username);
+
         $this->sendWelcomeMessage($conn);
-        $this->sendChatHistory($conn);
+        $this->sendChatHistory($conn, $tableId);
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $user = $this->getClientName($from);
+        $tableId = $this->getClientTableId($from);
 
-        $formattedMessage = "{$user}: {$msg}";
+        $formattedMessage = "{$user} (Mesa: {$tableId}): {$msg}";
 
-        $this->messageHistory[] = $formattedMessage;
+        $this->messageHistory[$tableId][] = $formattedMessage;
 
+        // Enviar a mensagem apenas para os usuários da mesma mesa
         foreach ($this->client as $client) {
-            $client->send($formattedMessage);
+            $clientId = intval($client->resourceId);
+            $clientTableId = $this->getTableIdFromConnection($client);
+
+            if ($clientTableId === $tableId) {
+                $client->send($formattedMessage);
+            }
         }
 
-        echo "Usuário {$user} enviou: {$msg}\n";
+        echo "{$user}: {$msg} (Mesa: {$tableId})\n";
     }
+
 
     public function onClose(ConnectionInterface $conn)
     {
@@ -57,12 +70,16 @@ class WebSocket implements MessageComponentInterface
 
     private function getClientName(ConnectionInterface $conn)
     {
-        // Obtenha o nome do usuário associado à conexão
         if (isset($this->clientNames[$conn->resourceId])) {
             return $this->clientNames[$conn->resourceId];
         }
 
-        return "NomePadrao"; // Substitua isso pela lógica real
+        return "NomePadrao";
+    }
+
+    private function setClientName(ConnectionInterface $conn, $username)
+    {
+        $this->clientNames[$conn->resourceId] = $username;
     }
 
     private function sendWelcomeMessage(ConnectionInterface $conn)
@@ -72,12 +89,56 @@ class WebSocket implements MessageComponentInterface
         $this->broadcast("Usuário {$user} entrou na mesa.");
     }
 
-    private function sendChatHistory(ConnectionInterface $conn)
+    private function sendChatHistory(ConnectionInterface $conn, $tableId)
     {
-        foreach ($this->messageHistory as $message) {
-            $conn->send($message);
+        if (isset($this->messageHistory[$tableId])) {
+            foreach ($this->messageHistory[$tableId] as $message) {
+                $conn->send($message);
+            }
         }
     }
+
+
+    private function getTableIdFromQueryString($queryString)
+    {
+        parse_str($queryString, $queryArray);
+        return isset($queryArray['idTable']) ? $queryArray['idTable'] : null;
+    }
+
+    private function getClientTableId(ConnectionInterface $conn)
+    {
+        $clientData = $this->client->offsetGet($conn);
+        return isset($clientData['tableId']) ? $clientData['tableId'] : null;
+    }
+
+    private function getUsernameFromDatabase(ConnectionInterface $conn)
+    {
+        $tableId = $this->getClientTableId($conn);
+
+        $stmt = Conn::getConn()->prepare('SELECT usernameUser FROM user u 
+                          JOIN members m ON u.idUser = m.idUser
+                          JOIN tables t ON m.idTable = t.idTable
+                          WHERE t.idTable = :tableId');
+
+        $stmt->bindValue(':tableId', $tableId, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['usernameUser'];
+        } else {
+            return "NomePadrao";
+        }
+    }
+
+    private function getTableIdFromConnection(ConnectionInterface $conn)
+    {
+        $queryString = $conn->httpRequest->getUri()->getQuery();
+        return $this->getTableIdFromQueryString($queryString);
+    }
+
+
 
     private function broadcast($message)
     {
@@ -85,4 +146,5 @@ class WebSocket implements MessageComponentInterface
             $client->send($message);
         }
     }
+
 }
