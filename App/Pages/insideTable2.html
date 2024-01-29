@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mesa.css">
+    <script src="mesa.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+       
+       <div class="app">
+        <header class="header">
+    
+         <div class="header-menu">
+          <a class="menu-link" onclick="mostrarConteudo('conteudo1')" href="#">Chat</a>
+          <a class="menu-link " onclick="mostrarConteudo('conteudo2')" href="#">Fichas</a>
+         </div>
+<!--
+         <div class="back-site">
+          <a href="index.html">voltar ao site</a>
+         </div>
+ -->
+         <div class="header-profile">
+          <div class="notification">
+            <span class="notification-number">0</span>      
+           <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+           </svg>
+          </div>
+          <img class="profile-img" src="https://images.unsplash.com/photo-1600353068440-6361ef3a86e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="">
+         </div>
+        </header>
+        <div class="wrapper">
+
+
+
+          <div class="left-side">
+            <div class="side-titles-container">
+                <div class="side-title" onclick="toggleDropdown('fichas-dropdown')">
+                    Fichas
+                    <div class="arrow-icon right"></div>
+                </div>
+                <div class="side-menu" id="fichas-dropdown">
+                    <a href="#">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M0 0h128v128H0zm0 0M192 0h128v128H192zm0 0M384 0h128v128H384zm0 0M0 192h128v128H0zm0 0" fill="currentColor"/>
+                        </svg>
+                        Adicionar Fichas
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 488.932 488.932" fill="currentColor">
+                            <path d="M243.158 61.361v-57.6c0-3.2 4-4.9 6.7-2.9l118.4 87c2 1.5 2 4.4 0 5.9l-118.4 87c-2.7 2-6.7.2-6.7-2.9v-57.5c-87.8 1.4-158.1 76-152.1 165.4 5.1 76.8 67.7 139.1 144.5 144 81.4 5.2 150.6-53 163-129.9 2.3-14.3 14.7-24.7 29.2-24.7 17.9 0 31.8 15.9 29 33.5-17.4 109.7-118.5 192-235.7 178.9-98-11-176.7-89.4-187.8-187.4-14.7-128.2 84.9-237.4 209.9-238.8z"/>
+                        </svg>
+                        Editar Fichas
+                    </a>
+                </div>
+            </div>
+        
+            <div class="side-titles-container">
+                <div class="side-title2" onclick="toggleDropdown('chat-dropdown')">
+                    Chat
+                    <div class="arrow-icon right"></div>
+                </div>
+                <div class="side-menu" id="chat-dropdown">
+                    <a href="#">
+                        <svg viewBox="0 0 512 512" fill="currentColor">
+                            <!-- Adicione o caminho do ícone -->
+                            
+                        </svg>
+                        Chat Global
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 512 512" fill="currentColor">
+                            <!-- Adicione o caminho do ícone -->
+                        </svg>
+                        Chat Privado
+                    </a>
+                </div>
+            </div>
+
+            <div class="side-titles-container">
+              <div class="side-title3" onclick="toggleDropdown('membros-dropdown')">
+                  Membros
+                  <div class="arrow-icon right"></div>
+              </div>
+              <div class="side-menu" id="membros-dropdown">
+                  <a href="#">
+                    <svg viewBox="0 0 512 512" fill="currentColor">
+                      <!-- Adicione o caminho do ícone -->
+                  </svg>
+                    Membro 1</a>
+                  <a href="#">
+                    <svg viewBox="0 0 512 512" fill="currentColor">
+                      <!-- Adicione o caminho do ícone -->
+                  </svg>
+                    Membro 2</a>
+              </div>
+          </div>
+        </div>
+
+
+
+
+
+
+         <div class="main-container">
+          <div class="chat conteudo" id="conteudo1">
+            <div class="chat-title">
+              <h1>Patrick</h1>
+              <h2>Andrade</h2>
+              <figure class="avatar">
+                <img src="img/1.1.jpeg" /></figure>
+            </div>
+
+
+
+            <!-- Remover caso necessário -->
+           <div class="messages-container">
+            <button class="clear-messages" id="clear-messages-button">Apagar Todas as Mensagens</button>
+          </div>
+           <!-- Remover caso necessário -->
+
+           
+
+            <div class="messages">
+              <div class="messages-content"></div>
+            </div>
+
+            <div class="message-box">
+              <textarea id="message-input" class="message-input" placeholder="Digite aqui..."></textarea>
+              <button id="send-button" class="message-submit">Send</button>
+            </div>
+          </div>
+          
+          </div>
+          <div class="bg"></div>
+        <div class="conteudo" id="conteudo2">
+            <h2>Conteúdo do Botão 2</h2>
+            <p>Este é o conteúdo associado ao Botão 2.</p>
+        </div>
+
+        <div class="conteudo" id="conteudo3">
+            <h2>Conteúdo do Botão 3</h2>
+            <p>Este é o conteúdo associado ao Botão 3.</p>
+        </div>
+
+          <div class="bg"></div>
+
+          </div>
+         </div>
+        </div>
+        <div class="overlay-app"></div>
+
+
+</body>
+</html>
