@@ -128,19 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
   renderMessages();
 });
 
-
-// Função para acessar todas as mensagens armazenadas
-function getAllMessages() {
-  return JSON.parse(localStorage.getItem('chatMessages')) || [];
-}
-
-// Função para apagar todas as mensagens armazenadas
-function clearAllMessages() {
-  localStorage.removeItem('chatMessages');
-  // Atualiza a exibição após apagar as mensagens
-  renderMessages();
-}
-
 // Exemplo de como você pode usar as funções
 document.addEventListener("DOMContentLoaded", function() {
   // ...
@@ -158,8 +145,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  // ... Seu código existente ...
-
   // Função para apagar uma mensagem específica
   function deleteMessage(index) {
     // Remove a mensagem do array de mensagens

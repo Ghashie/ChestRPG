@@ -45,7 +45,7 @@ html {
 
 body {
   font-family: var(--body-font);
-  background-image: url("img/fundoMesa.jpg");
+  background-image: url("../img/fundoMesa.jpg");
   background-size: cover;
   background-position: center;
   display: flex;

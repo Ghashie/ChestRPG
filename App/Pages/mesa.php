@@ -94,7 +94,7 @@ if (isset($_SESSION['idUser'])) {
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
   <title>Mesas</title>
   <link rel="stylesheet" href="../../css/mesa.css">
-  <script src="../../js/mesa.js"></script>
+  <script src="js/mesa.js"></script>
 </head>
 
 <body>
