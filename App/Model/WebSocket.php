@@ -19,25 +19,41 @@ class WebSocket implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
-        // Adicione essas linhas para permitir qualquer origem
-        $conn->httpRequest->addHeader('Access-Control-Allow-Origin', '*');
-        $conn->httpRequest->addHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        $conn->httpRequest->addHeader('Access-Control-Allow-Headers', 'Content-Type');
-        
-        $tableId = $this->getTableIdFromQueryString($conn->httpRequest->getUri()->getQuery());
-        $this->client->attach($conn, ['tableId' => $tableId]);
+        try {
+            $tableId = $this->getTableIdFromQueryString($conn->httpRequest->getUri()->getQuery());
 
-        error_log("Nova conexão estabelecida: {$conn->resourceId} (Mesa: {$tableId})");
+            if (!$tableId) {
+                $conn->close();
+                return;
+            }
 
-        $username = $this->getUsernameFromDatabase($conn);
-        $this->setClientName($conn, $username);
+            // Substitua estas linhas
+            $conn->httpRequest = $conn->httpRequest->withAddedHeader('Access-Control-Allow-Origin', '*');
+            $conn->httpRequest = $conn->httpRequest->withAddedHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+            $conn->httpRequest = $conn->httpRequest->withAddedHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-        $this->sendWelcomeMessage($conn);
-        $this->sendChatHistory($conn, $tableId);
+            $tableId = $this->getTableIdFromQueryString($conn->httpRequest->getUri()->getQuery());
+            $this->client->attach($conn, ['tableId' => $tableId]);
+
+            error_log("Nova conexão estabelecida: {$conn->resourceId} (Mesa: {$tableId})");
+
+            $username = $this->getUsernameFromDatabase($conn);
+            $this->setClientName($conn, $username);
+
+            $this->sendWelcomeMessage($conn);
+            $this->sendChatHistory($conn, $tableId);
+        } catch (\Exception $e) {
+            // Modificação na linha abaixo para adicionar informações sobre a conexão
+            throw new \Exception('Erro ao processar a conexão ' . $conn->resourceId . ': ' . $e->getMessage());
+        }
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
+        if (empty(trim($msg))) {
+            return;
+        }
+
         $user = $this->getClientName($from);
         $tableId = $this->getClientTableId($from);
 

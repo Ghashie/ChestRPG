@@ -7,8 +7,7 @@ require_once 'charactercard.php';
 class CharacterCardDao
 {
 
-  public function insertCharacterCard(CharacterCard $characterCard)
-  {
+  public function insertCharacterCard(CharacterCard $characterCard){
     try {
       $conn = Conn::getConn();
 
@@ -26,8 +25,7 @@ class CharacterCardDao
     }
   }
 
-  public function getCharacterCardsByUserAndTable($idUser, $idTable)
-  {
+  public function getCharacterCardsByUserAndTable($idUser, $idTable){
     try {
       $conn = Conn::getConn();
 
@@ -46,8 +44,7 @@ class CharacterCardDao
     }
   }
 
-  public function deleteCharacterCard($idCharacter)
-  {
+  public function deleteCharacterCard($idCharacter){
     try {
       $conn = Conn::getConn();
 

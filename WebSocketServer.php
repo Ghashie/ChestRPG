@@ -18,4 +18,3 @@ $server = IoServer::factory(
 
 $server->run();
 
-?>
