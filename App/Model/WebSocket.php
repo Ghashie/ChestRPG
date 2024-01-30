@@ -19,6 +19,11 @@ class WebSocket implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
+        // Adicione essas linhas para permitir qualquer origem
+        $conn->httpRequest->addHeader('Access-Control-Allow-Origin', '*');
+        $conn->httpRequest->addHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+        $conn->httpRequest->addHeader('Access-Control-Allow-Headers', 'Content-Type');
+        
         $tableId = $this->getTableIdFromQueryString($conn->httpRequest->getUri()->getQuery());
         $this->client->attach($conn, ['tableId' => $tableId]);
 
