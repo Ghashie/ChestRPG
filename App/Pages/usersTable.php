@@ -44,6 +44,8 @@ if (isset($_SESSION['idUser'])) {
 
     $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
     $tableDao->create($table); // Chamar a função create no TableDao
+    header("Location: insideTable.php?idTable=" . $table->getIdTable());
+    exit();
   }
 
   if (isset($_POST['join'])) {
@@ -64,12 +66,39 @@ if (isset($_SESSION['idUser'])) {
       $membersDao->join($member);
 
       // Redirecione ou faça qualquer outra coisa após o usuário se juntar à mesa
-      header("Location: insideTable.php");
+      header("Location: insideTable.php?idTable=" . $tableData['idTable']);
       exit();
     } else {
       // Mesa não encontrada, adicione a lógica apropriada (ex: exiba uma mensagem de erro)
       echo "Mesa não encontrada.";
     }
+  }
+
+  if (isset($_POST['leave'])) {
+    $tableId = $_POST['idTable'];
+    $membersDao = new \App\Model\MembersDao();
+    $membersDao->leaveTable($_SESSION['idUser']->getIdU(), $tableId);
+    header("Location: usersTable.php");
+    exit();
+  }
+
+  if (isset($_POST['delete'])) {
+    $tableId = $_POST['idTable'];
+    $tableDao = new \App\Model\TablesDao();
+    $tableDao->deleteTable($tableId);
+    header("Location: usersTable.php");
+    exit();
+  }
+
+  if (isset($_POST['confirmEdit'])) {
+    $table = new \App\Model\Tables();
+    $table->setIdT($_POST['TableId']);
+    $table->setNameT($_POST['TableName']);
+    $table->setDescriptionT($_POST['TableDescription']);
+    $tableDao = new \App\Model\TablesDao();
+    $tableDao->editTable($table);
+    header("Location: usersTable.php");
+    exit();
   }
 }
 
@@ -85,7 +114,7 @@ if (isset($_SESSION['idUser'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesas</title>
   <link rel="stylesheet" href="../../css/usersTable.css">
-  <script src="../../js/mesa.js"></script>
+  <script src="js/mesa.js"></script>
 </head>
 
 <body>
@@ -176,11 +205,54 @@ if (isset($_SESSION['idUser'])) {
           <?= $table['codeTable'] ?>
         </p>
         <a href="insideTable.php?idTable=<?= $table['idTable'] ?>" class="enter-button">Entrar</a>
-        <!-- Adicione outros detalhes do card conforme necessário -->
+
+        <form method="POST" action="usersTable.php">
+          <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']): ?>
+            <!-- Botões para o admin -->
+            <button id="openEditModalBtn" name="edit" value="<?= $table['idTable'] ?>" type="button">Editar</button>
+            <button class="delete-button" name="delete" value="<?= $table['idTable'] ?>" type="submit">Excluir</button>
+          <?php else: ?>
+            <!-- Botão para membros -->
+            <button class="leave-button" name="exit" value="<?= $table['idTable'] ?>" type="submit">Sair</button>
+          <?php endif; ?>
+        </form>
       </div>
     <?php endforeach; ?>
   </section>
+  <!-- Modal de Edição -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeEditModalBtn">&times;</span>
 
+      <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+      <div class="main-text-modal">
+        <h1>Atualize sua mesa</h1>
+      </div>
+      <form action="usersTable.php" method="POST">
+        <section class="control-group-main">
+          <div class="control-group">
+            <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>"
+              id="login-name">
+            <label class="user" for="login-name"></label>
+          </div>
+
+          <div class="control-group">
+            <input type="text" class="login-field" name="TableDescription"
+              placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
+            <label class="user" for="login-name"></label>
+          </div>
+
+          <div>
+            <div class="modal-button-main">
+              <button class="modal-button" type="submit" name="confirmEdit"><i class="animation"></i>Criar mesa<i
+                  class="animation"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>

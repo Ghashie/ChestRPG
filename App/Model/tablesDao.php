@@ -22,6 +22,8 @@ class TablesDao
         $stmt->bindvalue(5, $code);
 
         $stmt->execute();
+
+        header("Location: ../Pages/usersTable.php");
     }
 
     public function joinTable($idUser, $code)
@@ -51,40 +53,21 @@ class TablesDao
         }
     }
 
-    public function update(Tables $t)
+    public function editTable($idTable, $newName, $newDescription)
     {
-        $sql = 'UPDATE tables SET nameTable = ?, descriptionTable = ?, passwordTable = ?, idAdmin = ?, codeTable = ? WHERE idTable = ?';
-
+        $sql = 'UPDATE tables SET nameTable = ?, descriptionTable = ? WHERE idTable = ?';
         $stmt = Conn::getConn()->prepare($sql);
-        $stmt->bindvalue(1, $t->getNameT());
-        $stmt->bindvalue(2, $t->getDescriptionT());
-        $stmt->bindvalue(3, $t->getPasswordT());
-        $stmt->bindvalue(4, $t->getIdFK());
-        $stmt->bindvalue(5, $t->getCodeT());
-
+        $stmt->bindValue(1, $newName);
+        $stmt->bindValue(2, $newDescription);
+        $stmt->bindValue(3, $idTable);
         $stmt->execute();
     }
 
-    public function readUpdate($t)
-    {
-        $sql = 'SELECT * FROM tables WHERE idTable = ?';
-        $stmt = Conn::getConn()->prepare($sql);
-        $stmt->bindvalue(1, $t);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-            return $result;
-        } else {
-            return [];
-        }
-    }
-
-    public function delete($id)
+    public function deleteTable($idTable)
     {
         $sql = 'DELETE FROM tables WHERE idTable = ?';
         $stmt = Conn::getConn()->prepare($sql);
-        $stmt->bindvalue(1, $id);
+        $stmt->bindValue(1, $idTable);
         $stmt->execute();
     }
 
@@ -103,10 +86,12 @@ class TablesDao
         }
     }
 
-    public function getTablesByUserId($idUser){
-        $sql = 'SELECT t.* FROM tables t 
-                LEFT JOIN members m ON t.idTable = m.idTable 
-                WHERE m.idUser = :idUser OR t.idAdmin = :idUser';
+    public function getTablesByUserId($idUser)
+    {
+        $sql = 'SELECT t.*, m.isAdmin 
+            FROM tables t 
+            LEFT JOIN members m ON t.idTable = m.idTable 
+            WHERE m.idUser = :idUser OR t.idAdmin = :idUser';
 
         $stmt = Conn::getConn()->prepare($sql);
         $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
@@ -120,8 +105,8 @@ class TablesDao
         }
     }
 
-
-    public function getTableById($idTable){
+    public function getTableById($idTable)
+    {
         $sql = 'SELECT * FROM tables WHERE idTable = ?';
 
         $stmt = Conn::getConn()->prepare($sql);

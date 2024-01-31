@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeJoinModalBtn = document.getElementById("closeJoinModalBtn");
   const joinModal = document.getElementById("joinModal");
 
+  const openEditModalBtn = document.getElementById("openEditModalBtn"); // Correção aqui
+  const closeEditModalBtn = document.getElementById("closeEditModalBtn");
+  const editModal = document.getElementById("editModal");
+
   openModalBtn.addEventListener("click", function () {
     modal.style.display = "block";
   });
@@ -23,11 +27,21 @@ document.addEventListener("DOMContentLoaded", function () {
     joinModal.style.display = "none";
   });
 
+  openEditModalBtn.addEventListener("click", function () {
+    editModal.style.display = "block";
+  });
+
+  closeEditModalBtn.addEventListener("click", function () {
+    editModal.style.display = "none";
+  });
+
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     } else if (event.target === joinModal) {
       joinModal.style.display = "none";
+    } else if (event.target === editModal) {
+      editModal.style.display = "none";
     }
   });
 });

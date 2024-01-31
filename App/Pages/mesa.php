@@ -14,10 +14,10 @@ if (!isset($_SESSION)) {
 }
 // Verificar se o usuário está logado
 if (isset($_SESSION['idUser'])) {
-  if(!isset($_SESSION['idUser'])) {
+  if (!isset($_SESSION['idUser'])) {
     header("Location: ../Login/loginUser.php");
     exit();
-}
+  }
   // Obter o ID do usuário logado
   $_SESSION['idUser']->getIdU();
 
@@ -47,6 +47,8 @@ if (isset($_SESSION['idUser'])) {
 
       $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
       $tableDao->create($table); // Chamar a função create no TableDao
+      header("Location: insideTable.php?idTable=" . $table->getIdTable());
+      exit();
     }
 
     if (isset($_POST['join'])) {
@@ -67,7 +69,7 @@ if (isset($_SESSION['idUser'])) {
         $membersDao->join($member);
 
         // Redirecione ou faça qualquer outra coisa após o usuário se juntar à mesa
-        header("Location: insideTable.php");
+        header("Location: insideTable.php?idTable=" . $tableData['idTable']);
         exit();
       } else {
         // Mesa não encontrada, adicione a lógica apropriada (ex: exiba uma mensagem de erro)
