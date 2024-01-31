@@ -53,13 +53,13 @@ class TablesDao
         }
     }
 
-    public function editTable($idTable, $newName, $newDescription)
+    public function editTable(Tables $t)
     {
         $sql = 'UPDATE tables SET nameTable = ?, descriptionTable = ? WHERE idTable = ?';
         $stmt = Conn::getConn()->prepare($sql);
-        $stmt->bindValue(1, $newName);
-        $stmt->bindValue(2, $newDescription);
-        $stmt->bindValue(3, $idTable);
+        $stmt->bindValue(1, $t->getNameT());
+        $stmt->bindValue(2, $t->getDescriptionT());
+        $stmt->bindValue(3, $t->getIdT());
         $stmt->execute();
     }
 

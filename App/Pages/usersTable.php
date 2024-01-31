@@ -44,7 +44,7 @@ if (isset($_SESSION['idUser'])) {
 
     $tableDao = new \App\Model\TablesDao(); // Criar uma instância do TableDao
     $tableDao->create($table); // Chamar a função create no TableDao
-    header("Location: insideTable.php?idTable=" . $table->getIdTable());
+    header("Location: insideTable.php?idTable=" . $table->getIdT());
     exit();
   }
 
@@ -74,22 +74,6 @@ if (isset($_SESSION['idUser'])) {
     }
   }
 
-  if (isset($_POST['leave'])) {
-    $tableId = $_POST['idTable'];
-    $membersDao = new \App\Model\MembersDao();
-    $membersDao->leaveTable($_SESSION['idUser']->getIdU(), $tableId);
-    header("Location: usersTable.php");
-    exit();
-  }
-
-  if (isset($_POST['delete'])) {
-    $tableId = $_POST['idTable'];
-    $tableDao = new \App\Model\TablesDao();
-    $tableDao->deleteTable($tableId);
-    header("Location: usersTable.php");
-    exit();
-  }
-
   if (isset($_POST['confirmEdit'])) {
     $table = new \App\Model\Tables();
     $table->setIdT($_POST['TableId']);
@@ -101,9 +85,6 @@ if (isset($_SESSION['idUser'])) {
     exit();
   }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -139,8 +120,7 @@ if (isset($_SESSION['idUser'])) {
 
 
               <div class="control-group">
-                <input type="text" class="login-field" name="description" placeholder="Descricão da mesa"
-                  id="login-name">
+                <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
                 <label class="user" for="login-name"></label>
               </div>
 
@@ -151,8 +131,7 @@ if (isset($_SESSION['idUser'])) {
 
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i
-                      class="animation"></i>
+                  <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i class="animation"></i>
                   </button>
                 </div>
               </div>
@@ -180,8 +159,7 @@ if (isset($_SESSION['idUser'])) {
               </div>
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i
-                      class="animation"></i></button>
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i class="animation"></i></button>
                 </div>
               </div>
             </section>
@@ -193,7 +171,7 @@ if (isset($_SESSION['idUser'])) {
 
   <!-- Exemplo de card para uma mesa em usersTables.php -->
   <section class="cards-section">
-    <?php foreach ($participatingTables as $table): ?>
+    <?php foreach ($participatingTables as $table) : ?>
       <div class="card">
         <h3>
           <?= $table['nameTable'] ?>
@@ -206,16 +184,22 @@ if (isset($_SESSION['idUser'])) {
         </p>
         <a href="insideTable.php?idTable=<?= $table['idTable'] ?>" class="enter-button">Entrar</a>
 
-        <form method="POST" action="usersTable.php">
-          <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']): ?>
-            <!-- Botões para o admin -->
-            <button id="openEditModalBtn" name="edit" value="<?= $table['idTable'] ?>" type="button">Editar</button>
-            <button class="delete-button" name="delete" value="<?= $table['idTable'] ?>" type="submit">Excluir</button>
-          <?php else: ?>
-            <!-- Botão para membros -->
-            <button class="leave-button" name="exit" value="<?= $table['idTable'] ?>" type="submit">Sair</button>
-          <?php endif; ?>
-        </form>
+
+        <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']) : ?>
+          <!-- Botões para o admin -->
+          <button id="openEditModalBtn" value="<?= $table['idTable'] ?>" type="button">Editar</button>
+
+          <form method="POST" action="delete.php" onsubmit="return confirm('Tem certeza que deseja excluir esta mesa?');" style="display:inline;">
+            <input type="hidden" name="delete" value="<?= $table['idTable'] ?>">
+            <button class="delete-button" type="submit">Excluir</button>
+          </form>
+        <?php else : ?>
+          <!-- Botão para membros -->
+          <form method="POST" action="exit.php" onsubmit="return confirm('Tem certeza que deseja sair desta mesa?');" style="display:inline;">
+            <input type="hidden" name="exit" value="<?= $table['idTable'] ?>">
+            <button class="exit-button" type="submit">Sair</button>
+          </form>
+        <?php endif; ?>
       </div>
     <?php endforeach; ?>
   </section>
@@ -230,22 +214,20 @@ if (isset($_SESSION['idUser'])) {
       </div>
       <form action="usersTable.php" method="POST">
         <section class="control-group-main">
+          <input type="hidden" name="TableId" value="<?= $table['idTable'] ?>">
           <div class="control-group">
-            <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>"
-              id="login-name">
+            <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>" id="login-name">
             <label class="user" for="login-name"></label>
           </div>
 
           <div class="control-group">
-            <input type="text" class="login-field" name="TableDescription"
-              placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
+            <input type="text" class="login-field" name="TableDescription" placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
             <label class="user" for="login-name"></label>
           </div>
 
           <div>
             <div class="modal-button-main">
-              <button class="modal-button" type="submit" name="confirmEdit"><i class="animation"></i>Criar mesa<i
-                  class="animation"></i>
+              <button class="modal-button" type="submit" name="confirmEdit"><i class="animation"></i>Atualizar<i class="animation"></i>
               </button>
             </div>
           </div>

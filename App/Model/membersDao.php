@@ -40,5 +40,21 @@ class MembersDao
     }
   }
 
+  public function leaveTable(Members $m){
+    $sql = 'DELETE FROM members WHERE idTable = ? AND idUser = ?';
+    $stmt = Conn::getConn()->prepare($sql);
+    $stmt->bindvalue(1, $m->getIdTM());
+    $stmt->bindvalue(2, $m->getIdUM()->getIdU());
+    $stmt->execute();
+  }
+
+  public function deleteMembersByTableId($idTable)
+    {
+        $sql = 'DELETE FROM members WHERE idTable = ?';
+        $stmt = Conn::getConn()->prepare($sql);
+        $stmt->bindValue(1, $idTable);
+        $stmt->execute();
+    }
+
 }
 ?>
