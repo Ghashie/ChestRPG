@@ -12,12 +12,24 @@ require_once '../Model/membersDao.php';
 if (!isset($_SESSION)) {
   session_start();
 }
+
+if (!isset($_SESSION['idUser'])) { // Verificar se o usuário está logado
+  header("Location: ../Login/loginUser.php"); // Se não estiver logado, redirecione para a página de login
+  exit();
+}
+
+function isUserLoggedIn()
+  {
+    return isset($_SESSION['idUser']);
+  }
+
 // Verificar se o usuário está logado
 if (isset($_SESSION['idUser'])) {
   if (!isset($_SESSION['idUser'])) {
     header("Location: ../Login/loginUser.php");
     exit();
   }
+
   // Obter o ID do usuário logado
   $_SESSION['idUser']->getIdU();
 
@@ -25,11 +37,7 @@ if (isset($_SESSION['idUser'])) {
   $participatingTables = $tableDao->getTablesByUserId($_SESSION['idUser']->getIdU());
 
   if (empty($participatingTables)) {
-    if (!isset($_SESSION['idUser'])) { // Verificar se o usuário está logado
-      header("Location: ../Login/loginUser.php"); // Se não estiver logado, redirecione para a página de login
-      exit();
-    }
-
+    
     // Verificar se o formulário de criação de mesa foi enviado
     if (isset($_POST['create'])) {
       $tableName = $_POST['name'];
@@ -96,28 +104,33 @@ if (isset($_SESSION['idUser'])) {
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
   <title>Mesas</title>
   <link rel="stylesheet" href="../../css/mesa.css">
+  <link rel="stylesheet" href="../../css/menu.css">
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="js/mesa.js"></script>
 </head>
 
 <body>
   <header class="header">
-
-    <div class="logo">
-      <a href="index.html"><img src="Chest_RPG_NoBackGround.png" alt="" class="logo-img"></a>
-    </div>
-    <div class="container">
-      <button class="btn">Home</button>
-      <button class="btn">Sobre</button>
-      <div class="dropdown">
-        <button class="dropdown-button">Mesas </button>
-        <div class="dropdown-content">
-          <a href="#">Criar mesa</a>
-          <a href="#">Entrar em mesa existente</a>
-        </div>
+    <section class="header-container">
+      <div class="logo">
+        <a href="index.html"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
       </div>
-      <button class="btn">Atualizações</button>
-    </div>
-    <div class="login">Login <a href="../Login/logout.php">Logout</a></div>
+      <ul class="menu-buttons">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="usersTable.html">MESAS</a></li>
+        <li><a href="">SOBRE</a></li>
+        <li><a href="">NOVIDADES</a></li>
+      </ul>
+      <?php if (isUserLoggedIn()) : ?>
+        <div class="login">
+          <a href="../Login/logout.php"><box-icon class="box-icon" name='exit' color='#ffffff'></box-icon></a>
+        </div>
+      <?php else : ?>
+        <div class="login">
+          <a href="../Login/loginUser.php"><box-icon class="box-icon" name='user' color='#ffffff'></box-icon></a>
+        </div>
+      <?php endif; ?>
+    </section>
   </header>
 
   <main class="main-content">
@@ -141,8 +154,7 @@ if (isset($_SESSION['idUser'])) {
 
 
               <div class="control-group">
-                <input type="text" class="login-field" name="description" placeholder="Descricão da mesa"
-                  id="login-name">
+                <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
                 <label class="user" for="login-name"></label>
               </div>
 
@@ -153,8 +165,7 @@ if (isset($_SESSION['idUser'])) {
 
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i
-                      class="animation"></i>
+                  <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i class="animation"></i>
                   </button>
                 </div>
               </div>
@@ -184,8 +195,7 @@ if (isset($_SESSION['idUser'])) {
               </div>
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i
-                      class="animation"></i></button>
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i class="animation"></i></button>
                 </div>
               </div>
             </section>

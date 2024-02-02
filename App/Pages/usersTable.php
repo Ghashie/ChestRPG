@@ -109,12 +109,12 @@ if (isset($_SESSION['idUser'])) {
   <header class="header">
     <section class="header-container">
       <div class="logo">
-        <a href="index.html"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
+        <a href="../../index.php"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
       </div>
       <ul class="menu-buttons">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="usersTable.html">MESAS</a></li>
-        <li><a href="">SOBRE</a></li>
+        <li><a href="../../index.php">HOME</a></li>
+        <li><a href="mesa.php">MESAS</a></li>
+        <li><a href="../../index.php#update">SOBRE</a></li>
         <li><a href="">NOVIDADES</a></li>
       </ul>
       <?php if (isUserLoggedIn()): ?>
