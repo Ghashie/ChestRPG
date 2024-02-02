@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+function isUserLoggedIn() {
+    return isset($_SESSION['idUser']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,34 +17,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Montserrat:wght@100&display=swap"
     rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=MedievalSharp' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=MedievalSharp' rel='stylesheet'>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/menu.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
   <title>CHEST RPG</title>
 </head>
 
 <body>
 
-  <header class="header" id="header">
-    <div class="logo">
-      <a href="index.html"><img src="img/logo.png" alt="" class="logo-img"></a>
-    </div>
-
-    <div class="container" >
-        <a href="#puxar"><button class="btn"  >HOME</button></a>
-     <a href="#update"><button class="btn">SOBRE</button></a> 
-      <div class="dropdown">
-        <button class="dropdown-button">MESAS </button>
-        <div class="dropdown-content">
-          <a href="#">Criar mesa</a>
-          <a href="#">Entrar em mesa existente</a>
-        </div>
+  <header class="header">
+    <section class="header-container">
+      <div class="logo">
+        <a href="index.html"><img src="./img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
       </div>
-      <button class="btn" onclick="window.location.href='App/Pages/atualizacao.php'">ATUALIZAÇÕES</button>
-    </div>
-    <div class="login">LOgin</div>
-    
+      <ul class="menu-buttons">
+        <li><a href="index.php">HOME</a></li>
+        <li><a href="App/Pages/mesa.php">MESAS</a></li>
+        <li><a href="#update">SOBRE</a></li>
+        <li><a href="App/Pages/atualizacao.php">NOVIDADES</a></li>
+      </ul>
+      <?php if (isUserLoggedIn()): ?>
+        <div class="login">
+          <a href="../Login/logout.php"><box-icon class="box-icon" name='exit' color='#ffffff'></box-icon></a>
+        </div>
+      <?php else: ?>
+        <div class="login">
+          <a href="../Login/loginUser.php"><box-icon class="box-icon" name='user' color='#ffffff' type='solid'></box-icon></a>
+        </div>
+      <?php endif; ?>
+    </section>
   </header>
-<div id="puxar"></div>
+  <div id="puxar"></div>
   <main class="main-content">
 
     <section class="first-section">
@@ -111,9 +123,9 @@
         </div>
 
       </section>
-      
+
     </section>
-    <section class="update" id="update" >
+    <section class="update" id="update">
       <div class="text-container-update">
         <h1>Sobre Nós</h1>
       </div>
@@ -178,23 +190,23 @@
 
     <section class="button-gallery">
       <div class="button-container-gallery">
-       <button > <a href="App/Pages/classes.php"> EXPLORE MAIS CLASSES </a></button>
+        <button> <a href="App/Pages/classes.php"> EXPLORE MAIS CLASSES </a></button>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <section class="first-footer">
-      <div class="text-first-footer" >
+      <div class="text-first-footer">
         <h1>SOBRE O CHEST RPG</h1>
       </div>
-      <div class="text-first-footer" >
+      <div class="text-first-footer">
         <h1>BAIXE NOSSO APLICATIVO</h1>
       </div>
-      <div class="text-first-footer" >
+      <div class="text-first-footer">
         <h1>DEIXE O SEU FEEDBACK</h1>
       </div>
-      <div class="text-first-footer" >
+      <div class="text-first-footer">
         <h1>SUPORTE</h1>
       </div>
 
@@ -203,17 +215,17 @@
     <section class="second-footer">
       <div class="image-second-footer">
         <div class="image-footer">
-        <img src="img/face.svg" alt="">
-      </div>
-      <div class="image-footer">
-        <img src="img/insta.svg" alt="">
-      </div>
-      <div class="image-footer">
-        <img src="img/twitter.svg" alt="">
-      </div>
-      <div class="image-footer">
-        <img src="img/discord.svg" alt="">
-      </div>
+          <img src="img/face.svg" alt="">
+        </div>
+        <div class="image-footer">
+          <img src="img/insta.svg" alt="">
+        </div>
+        <div class="image-footer">
+          <img src="img/twitter.svg" alt="">
+        </div>
+        <div class="image-footer">
+          <img src="img/discord.svg" alt="">
+        </div>
       </div>
 
       <div class="logo-footer">
@@ -228,4 +240,3 @@
 </body>
 
 </html>
-

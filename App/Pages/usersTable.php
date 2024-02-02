@@ -17,6 +17,11 @@ if (isset($_SESSION['idUser'])) {
     exit();
   }
 
+  function isUserLoggedIn()
+  {
+    return isset($_SESSION['idUser']);
+  }
+
   $_SESSION['idUser']->getIdU();
 
   if (!isset($_SESSION['idUser'])) { // Verificar se o usuário está logado
@@ -94,115 +99,169 @@ if (isset($_SESSION['idUser'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesas</title>
-  <link rel="stylesheet" href="../../css/usersTable.css">
+  <link rel="stylesheet" href="css/usersTable.css">
+  <link rel="stylesheet" href="../../css/menu.css">
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="js/mesa.js"></script>
 </head>
 
 <body>
-  <main class="main-content">
-
-    <div class="content-button-left">
-      <button id="openModalBtn" class="button"> Crie sua mesa</button>
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close" id="closeModalBtn">&times;</span>
-
-          <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
-          <div class="main-text-modal">
-            <h1>Crie sua mesa</h1>
-          </div>
-          <form action="usersTable.php" method="POST">
-            <section class="control-group-main">
-              <div class="control-group">
-                <input type="text" class="login-field" name="name" placeholder="Nome da mesa" id="login-name">
-                <label class="user" for="login-name"></label>
-              </div>
-
-
-              <div class="control-group">
-                <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
-                <label class="user" for="login-name"></label>
-              </div>
-
-              <div class="control-group">
-                <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
-                <label class="key" for="login-pass"></label>
-              </div>
-
-              <div>
-                <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i class="animation"></i>
-                  </button>
-                </div>
-              </div>
-            </section>
-          </form>
+  <header class="header">
+    <section class="header-container">
+      <div class="logo">
+        <a href="index.html"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
+      </div>
+      <ul class="menu-buttons">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="usersTable.html">MESAS</a></li>
+        <li><a href="">SOBRE</a></li>
+        <li><a href="">NOVIDADES</a></li>
+      </ul>
+      <?php if (isUserLoggedIn()): ?>
+        <div class="login">
+          <a href="../Login/logout.php"><box-icon class="box-icon" name='exit' color='#ffffff'></box-icon></a>
         </div>
+      <?php else: ?>
+        <div class="login">
+          <a href="../Login/loginUser.php"><box-icon class="box-icon" name='user' color='#ffffff'></box-icon></a>
+        </div>
+      <?php endif; ?>
+    </section>
+  </header>
+
+  <section class="buttons-users-table">
+    <button id="openModalBtn" class="button">Crie uma mesa</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+
+        <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+        <div class="main-text-modal">
+          <h1>Crie sua mesa</h1>
+        </div>
+        <form action="usersTable.php" method="POST">
+          <section class="control-group-main">
+            <div class="control-group">
+              <input type="text" class="login-field" name="name" placeholder="Nome da mesa" id="login-name">
+              <label class="user" for="login-name"></label>
+            </div>
+
+
+            <div class="control-group">
+              <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
+              <label class="user" for="login-name"></label>
+            </div>
+
+            <div class="control-group">
+              <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
+              <label class="key" for="login-pass"></label>
+            </div>
+
+            <div>
+              <div class="modal-button-main">
+                <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i
+                    class="animation"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+        </form>
       </div>
     </div>
 
-    <div class="content-button-right">
-      <button id="openJoinModalBtn" class="button"> Juntar-se a uma mesa</button>
-      <div id="joinModal" class="modal">
-        <div class="modal-content">
-          <span class="close" id="closeJoinModalBtn">&times;</span>
+    <button id="openJoinModalBtn" class="button">Entre em uma mesa</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
 
-          <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
-          <div class="main-text-modal">
-            <h1>Junte-se a uma mesa</h1>
-          </div>
-          <form action="usersTable.php" method="POST">
-            <section class="control-group-main">
-              <div class="control-group">
-                <input type="text" class="login-field" name="code" placeholder="Código da mesa" id="login-name">
-                <label class="user" for="login-name"></label>
-              </div>
-              <div>
-                <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i class="animation"></i></button>
-                </div>
-              </div>
-            </section>
-          </form>
+        <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+        <div class="main-text-modal">
+          <h1>Crie sua mesa</h1>
         </div>
+        <form action="usersTable.php" method="POST">
+          <section class="control-group-main">
+            <div class="control-group">
+              <input type="text" class="login-field" name="name" placeholder="Nome da mesa" id="login-name">
+              <label class="user" for="login-name"></label>
+            </div>
+
+
+            <div class="control-group">
+              <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
+              <label class="user" for="login-name"></label>
+            </div>
+
+            <div class="control-group">
+              <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
+              <label class="key" for="login-pass"></label>
+            </div>
+
+            <div>
+              <div class="modal-button-main">
+                <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i
+                    class="animation"></i>
+                </button>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="text-users-table">
+      <h1>SUAS MESAS</h1>
+    </div>
+
+    <div class="container-buttons">
+      <div class="row">
+        <?php foreach ($participatingTables as $table): ?>
+          <div class="col-md-6">
+            <div class="button" href="insideTable.php?idTable=<?= $table['idTable'] ?>">
+              <div class="tableCode">
+                <p>
+                  <?= $table['codeTable'] ?>
+                </p>
+              </div>
+
+              <div class="tableName">
+                <h2>
+                  <?= $table['nameTable'] ?>
+                </h2>
+              </div>
+
+              <div class="tableDescription">
+                <p>
+                  <?= $table['descriptionTable'] ?>
+                </p>
+              </div>
+
+              <div class="tableButtons">
+                <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']): ?>
+                  <!-- Botões para o admin -->
+                  <button id="openEditModalBtn" value="<?= $table['idTable'] ?>" type="button">EDITAR</button>
+                  <form method="POST" action="delete.php"
+                    onsubmit="return confirm('Tem certeza que deseja excluir esta mesa?');" style="display:inline;">
+                    <input type="hidden" name="delete" value="<?= $table['idTable'] ?>">
+                    <button type="submit">EXCLUIR</button>
+                  </form>
+                <?php else: ?>
+                  <!-- Botão para membros -->
+                  <form method="POST" action="exit.php"
+                    onsubmit="return confirm('Tem certeza que deseja sair desta mesa?');" style="display:inline;">
+                    <input type="hidden" name="exit" value="<?= $table['idTable'] ?>">
+                    <button class="exit-button" type="submit">SAIR</button>
+                  </form>
+                <?php endif; ?>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </main>
 
-  <!-- Exemplo de card para uma mesa em usersTables.php -->
-  <section class="cards-section">
-    <?php foreach ($participatingTables as $table) : ?>
-      <div class="card">
-        <h3>
-          <?= $table['nameTable'] ?>
-        </h3>
-        <p>
-          <?= $table['descriptionTable'] ?>
-        </p>
-        <p>Código:
-          <?= $table['codeTable'] ?>
-        </p>
-        <a href="insideTable.php?idTable=<?= $table['idTable'] ?>" class="enter-button">Entrar</a>
-
-
-        <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']) : ?>
-          <!-- Botões para o admin -->
-          <button id="openEditModalBtn" value="<?= $table['idTable'] ?>" type="button">Editar</button>
-
-          <form method="POST" action="delete.php" onsubmit="return confirm('Tem certeza que deseja excluir esta mesa?');" style="display:inline;">
-            <input type="hidden" name="delete" value="<?= $table['idTable'] ?>">
-            <button class="delete-button" type="submit">Excluir</button>
-          </form>
-        <?php else : ?>
-          <!-- Botão para membros -->
-          <form method="POST" action="exit.php" onsubmit="return confirm('Tem certeza que deseja sair desta mesa?');" style="display:inline;">
-            <input type="hidden" name="exit" value="<?= $table['idTable'] ?>">
-            <button class="exit-button" type="submit">Sair</button>
-          </form>
-        <?php endif; ?>
-      </div>
-    <?php endforeach; ?>
-  </section>
   <!-- Modal de Edição -->
   <div id="editModal" class="modal">
     <div class="modal-content">
@@ -216,18 +275,21 @@ if (isset($_SESSION['idUser'])) {
         <section class="control-group-main">
           <input type="hidden" name="TableId" value="<?= $table['idTable'] ?>">
           <div class="control-group">
-            <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>" id="login-name">
+            <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>"
+              id="login-name">
             <label class="user" for="login-name"></label>
           </div>
 
           <div class="control-group">
-            <input type="text" class="login-field" name="TableDescription" placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
+            <input type="text" class="login-field" name="TableDescription"
+              placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
             <label class="user" for="login-name"></label>
           </div>
 
           <div>
             <div class="modal-button-main">
-              <button class="modal-button" type="submit" name="confirmEdit"><i class="animation"></i>Atualizar<i class="animation"></i>
+              <button class="modal-button" type="submit" name="confirmEdit"><i class="animation"></i>Atualizar<i
+                  class="animation"></i>
               </button>
             </div>
           </div>
