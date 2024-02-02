@@ -72,7 +72,7 @@ if (isset($_POST["record"])) {
             </section>
             <button type="submit" name="record" class="btn btn-primary btn-large btn-block"><a href="">Cadastre-se</a></button>
             <p style="margin-top: 12px;">
-              <a class="login-link create" href="login.html">Entrar em minha conta</a>
+              <a class="login-link create" href="loginUser.php">Entrar em minha conta</a>
             </p>
           </div>
         </form>
