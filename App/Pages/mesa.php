@@ -81,7 +81,7 @@ if (isset($_SESSION['idUser'])) {
         exit();
       } else {
         // Mesa não encontrada, adicione a lógica apropriada (ex: exiba uma mensagem de erro)
-        echo "Mesa não encontrada.";
+        echo "<script>alert('Mesa não encontrada.');</script>";
       }
     }
   } else {
@@ -116,10 +116,10 @@ if (isset($_SESSION['idUser'])) {
         <a href="index.html"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
       </div>
       <ul class="menu-buttons">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="usersTable.html">MESAS</a></li>
-        <li><a href="">SOBRE</a></li>
-        <li><a href="">NOVIDADES</a></li>
+        <li><a href="../../index.php">HOME</a></li>
+        <li><a href="mesa.php">MESAS</a></li>
+        <li><a href="../../index.php#update">SOBRE</a></li>
+        <li><a href="atualizacao.php">NOVIDADES</a></li>
       </ul>
       <?php if (isUserLoggedIn()) : ?>
         <div class="login">
@@ -141,7 +141,7 @@ if (isset($_SESSION['idUser'])) {
         <div class="modal-content">
           <span class="close" id="closeModalBtn">&times;</span>
 
-          <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+          <div class="modal-logo-main"><img class="modal-logo" src="../../img/logo.png" alt=""></div>
           <div class="main-text-modal">
             <h1>Crie sua mesa</h1>
           </div>
@@ -183,7 +183,7 @@ if (isset($_SESSION['idUser'])) {
         <div class="modal-content">
           <span class="close" id="closeJoinModalBtn">&times;</span>
 
-          <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+          <div class="modal-logo-main"><img class="modal-logo" src="../../img/logo.png" alt=""></div>
           <div class="main-text-modal">
             <h1>Junte-se a uma mesa</h1>
           </div>
@@ -195,7 +195,7 @@ if (isset($_SESSION['idUser'])) {
               </div>
               <div>
                 <div class="modal-button-main">
-                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Criar mesa<i class="animation"></i></button>
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Proucurar mesa<i class="animation"></i></button>
                 </div>
               </div>
             </section>

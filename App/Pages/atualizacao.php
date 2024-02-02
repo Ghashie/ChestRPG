@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+function isUserLoggedIn() {
+    return isset($_SESSION['idUser']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,28 +14,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="../../css/atualizacao.css">
+  <link rel="stylesheet" href="../../css/menu.css">
   <link href='https://fonts.googleapis.com/css?family=MedievalSharp' rel='stylesheet'>
   
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="index.html"><img src="../../img/logo.png" alt="" class="logo-img"></a>
-    </div>
-    <div class="container">
-      <button class="btn">HOME</button>
-      <button class="btn">SOBRE</button>
-      <div class="dropdown">
-        <button class="dropdown-button">MESAS </button>
-        <div class="dropdown-content">
-          <a href="#">Criar mesa</a>
-          <a href="#">Entrar em mesa existente</a>
-        </div>
+<header class="header">
+    <section class="header-container">
+      <div class="logo">
+        <a href="index.html"><img src="../../img/CHEST_RPG__1_-removebg-preview.png" alt="" class="logo-img"></a>
       </div>
-      <button class="btn">ATUALIZAÇÕES</button>
-    </div>
-    <div class="login">LOgin</div>
+      <ul class="menu-buttons">
+        <li><a href="../../index.php">HOME</a></li>
+        <li><a href="mesa.php">MESAS</a></li>
+        <li><a href="../../index.php#update">SOBRE</a></li>
+        <li><a href="atualizacao.php">NOVIDADES</a></li>
+      </ul>
+      <?php if (isUserLoggedIn()) : ?>
+        <div class="login">
+          <a href="../Login/logout.php"><box-icon class="box-icon" name='exit' color='#ffffff'></box-icon></a>
+        </div>
+      <?php else : ?>
+        <div class="login">
+          <a href="../Login/loginUser.php"><box-icon class="box-icon" name='user' color='#ffffff'></box-icon></a>
+        </div>
+      <?php endif; ?>
+    </section>
   </header>
 
 

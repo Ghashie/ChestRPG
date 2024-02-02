@@ -135,7 +135,7 @@ if (isset($_SESSION['idUser'])) {
       <div class="modal-content">
         <span class="close" id="closeModalBtn">&times;</span>
 
-        <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
+        <div class="modal-logo-main"><img class="modal-logo" src="../../img/logo.png" alt=""></div>
         <div class="main-text-modal">
           <h1>Crie sua mesa</h1>
         </div>
@@ -170,42 +170,28 @@ if (isset($_SESSION['idUser'])) {
     </div>
 
     <button id="openJoinModalBtn" class="button">Entre em uma mesa</button>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close" id="closeModalBtn">&times;</span>
+    <div id="joinModal" class="modal">
+    <div class="modal-content">
+          <span class="close" id="closeJoinModalBtn">&times;</span>
 
-        <div class="modal-logo-main"><img class="modal-logo" src="../img/logo.png" alt=""></div>
-        <div class="main-text-modal">
-          <h1>Crie sua mesa</h1>
-        </div>
-        <form action="usersTable.php" method="POST">
-          <section class="control-group-main">
-            <div class="control-group">
-              <input type="text" class="login-field" name="name" placeholder="Nome da mesa" id="login-name">
-              <label class="user" for="login-name"></label>
-            </div>
-
-
-            <div class="control-group">
-              <input type="text" class="login-field" name="description" placeholder="Descricão da mesa" id="login-name">
-              <label class="user" for="login-name"></label>
-            </div>
-
-            <div class="control-group">
-              <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
-              <label class="key" for="login-pass"></label>
-            </div>
-
-            <div>
-              <div class="modal-button-main">
-                <button class="modal-button" type="submit" name="create"><i class="animation"></i>Criar mesa<i
-                    class="animation"></i>
-                </button>
+          <div class="modal-logo-main"><img class="modal-logo" src="../../img/logo.png" alt=""></div>
+          <div class="main-text-modal">
+            <h1>Junte-se a uma mesa</h1>
+          </div>
+          <form action="usersTable.php" method="POST">
+            <section class="control-group-main">
+              <div class="control-group">
+                <input type="text" class="login-field" name="code" placeholder="Código da mesa" id="login-name">
+                <label class="user" for="login-name"></label>
               </div>
-            </div>
-          </section>
-        </form>
-      </div>
+              <div>
+                <div class="modal-button-main">
+                  <button class="modal-button" type="submit" name="join"><i class="animation"></i>Proucurar mesa<i class="animation"></i></button>
+                </div>
+              </div>
+            </section>
+          </form>
+        </div>
     </div>
   </section>
 
