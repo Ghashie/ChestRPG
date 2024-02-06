@@ -1,11 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream
 -- Tempo de geração: 30-Jan-2024 às 15:49
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
+=======
+-- Tempo de geração: 06-Fev-2024 às 21:05
+-- Versão do servidor: 10.4.32-MariaDB
+-- versão do PHP: 8.2.12
+>>>>>>> Stashed changes
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,8 +57,12 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`idUser`, `idTable`, `isAdmin`) VALUES
+<<<<<<< Updated upstream
 (9, 17, 0),
 (10, 16, 0);
+=======
+(4, 6, 0);
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -74,8 +84,13 @@ CREATE TABLE `tables` (
 --
 
 INSERT INTO `tables` (`idTable`, `nameTable`, `descriptionTable`, `passwordTable`, `codeTable`, `idAdmin`) VALUES
+<<<<<<< Updated upstream
 (16, 'Projetinho', 'Sala projeto', '123', 'hmac5x', 9),
 (17, 'Pokemon', 'Pokemon', '123', 'hmac7z', 10);
+=======
+(6, 'Teste', 'Primeira mesa testada', '123', 'hm4h8c', 4),
+(12, 'Familia', 'Toretto\'s Family', '123', 'hm5nmb', 4);
+>>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -95,8 +110,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `usernameUser`, `emailUser`, `passwordUser`) VALUES
+<<<<<<< Updated upstream
 (9, 'Thiago', 'th@gmail.com', '$2y$10$BHgRvtHiy7Lk8fW2aZS7DelZO0tCxwBry.7fxcIZwmwC0E3Fj5cm2'),
 (10, 'Patrick', 'ptk@gmail.com', '$2y$10$a8ZEs5hu7OUK9xKwEGTE5uXWf433oyM27VwHiHr54KO0.ecirimI2');
+=======
+(4, 'Yugi', 'yugi@gmail.com', '$2y$10$rlJiXsMlODC7v4Hiu4bVwuqit2jFTA8.YOhEki8AhV.WWYgCn1XvG'),
+(19, 'Vasco', 'vasco@gmail.com', '$2y$10$f6rg3aMiagW06wlgEuTGpuEDcQwh974541yrlcbwgj1SBFhL6mWhe'),
+(24, 'ABC', 'abc@gmail.com', '$2y$10$k1fkcP5tdjCdFs3WumevGOvrr77SCt9SKYFF3NgX31lhjah5AN3nq'),
+(25, 'Thiago', 'th@gmail.com', '$2y$10$z0HAmFi.ZGG1RGaHPJ24YuikBaFo.dJG.72jN5R9FmSe7KLOYqwdu');
+>>>>>>> Stashed changes
 
 --
 -- Índices para tabelas despejadas
@@ -151,7 +173,11 @@ ALTER TABLE `tables`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
+<<<<<<< Updated upstream
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+=======
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+>>>>>>> Stashed changes
 
 --
 -- Restrições para despejos de tabelas
@@ -161,21 +187,21 @@ ALTER TABLE `user`
 -- Limitadores para a tabela `charactercard`
 --
 ALTER TABLE `charactercard`
-  ADD CONSTRAINT `charactercard_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `charactercard_ibfk_2` FOREIGN KEY (`idTable`) REFERENCES `tables` (`idTable`);
+  ADD CONSTRAINT `charactercard_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE,
+  ADD CONSTRAINT `charactercard_ibfk_2` FOREIGN KEY (`idTable`) REFERENCES `tables` (`idTable`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `members`
 --
 ALTER TABLE `members`
-  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `members_ibfk_2` FOREIGN KEY (`idTable`) REFERENCES `tables` (`idTable`);
+  ADD CONSTRAINT `members_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE,
+  ADD CONSTRAINT `members_ibfk_2` FOREIGN KEY (`idTable`) REFERENCES `tables` (`idTable`) ON DELETE CASCADE;
 
 --
 -- Limitadores para a tabela `tables`
 --
 ALTER TABLE `tables`
-  ADD CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`idAdmin`) REFERENCES `user` (`idUser`);
+  ADD CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`idAdmin`) REFERENCES `user` (`idUser`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
