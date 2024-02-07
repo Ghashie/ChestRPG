@@ -153,7 +153,7 @@ if (isset($_SESSION['idUser'])) {
             </div>
 
             <div class="control-group">
-              <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
+              <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass" hidden>
               <label class="key" for="login-pass"></label>
             </div>
 
@@ -222,6 +222,9 @@ if (isset($_SESSION['idUser'])) {
                   <?= $table['descriptionTable'] ?>
                 </p>
               </div>
+              <div>
+              <a href="insideTable.php?idTable=<?= $table['idTable'] ?>" class="enter-button">Entrar</a> 
+              </div>
 
               <div class="tableButtons">
                 <?php if ($_SESSION['idUser']->getIdU() == $table['idAdmin']): ?>
@@ -262,13 +265,13 @@ if (isset($_SESSION['idUser'])) {
           <input type="hidden" name="TableId" value="<?= $table['idTable'] ?>">
           <div class="control-group">
             <input type="text" class="login-field" name="TableName" placeholder="<?php echo $table['nameTable']; ?>"
-              id="login-name">
+              id="login-name" required>
             <label class="user" for="login-name"></label>
           </div>
 
           <div class="control-group">
             <input type="text" class="login-field" name="TableDescription"
-              placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name">
+              placeholder="<?php echo $table['descriptionTable']; ?>" id="login-name" required>
             <label class="user" for="login-name"></label>
           </div>
 

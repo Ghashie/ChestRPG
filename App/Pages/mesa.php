@@ -159,7 +159,7 @@ if (isset($_SESSION['idUser'])) {
               </div>
 
               <div class="control-group">
-                <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass">
+                <input type="password" class="login-field" name="password" placeholder="Senha da mesa" id="login-pass" hidden>
                 <label class="key" for="login-pass"></label>
               </div>
 
